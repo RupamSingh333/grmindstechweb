@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="flex flex-col items-start">
             <img 
               src={logo} 
-              alt="G.R. Minds Technologies" 
+              alt="G.R Minds Technologies" 
               className="h-20 w-auto mb-4 hover:scale-105 transition-transform duration-300" 
             />
             <p className="text-sm text-muted-foreground max-w-xs">
@@ -75,7 +75,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="border-t border-border/20 pt-8 text-center text-sm text-muted-foreground">
           <p>
-            &copy; 2026 <span className="text-primary font-semibold">G.R. Minds Technologies</span>. All rights reserved.
+            &copy; 2026 <span className="text-primary font-semibold">G.R Minds Technologies</span>. All rights reserved.
           </p>
         </div>
       </div>

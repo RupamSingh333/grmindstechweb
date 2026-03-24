@@ -72,7 +72,7 @@ const Hero = () => {
                 ease: "easeInOut" 
               }}
             >
-              G.R. Minds Technologies
+              G.R Minds Technologies
             </motion.h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Transforming Ideas Into Digital Reality Through Innovation & Excellence

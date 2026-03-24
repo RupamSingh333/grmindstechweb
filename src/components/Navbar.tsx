@@ -41,7 +41,7 @@ const Navbar = () => {
           {/* Logo */}
           <img
             src={logo}
-            alt="G.R. Minds Technologies"
+            alt="G.R Minds Technologies"
             className="h-14 w-auto cursor-pointer hover:scale-105 transition-transform duration-300"
             onClick={() => scrollToSection('home')}
           />

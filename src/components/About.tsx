@@ -66,10 +66,10 @@ const About = () => {
             <ScrollReveal direction="left">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                  About <span className="glow-text">G.R. Minds</span>
+                  About <span className="glow-text">G.R Minds</span>
                 </h2>
                 <p className="text-lg text-muted-foreground mb-4">
-                  At G.R. Minds, we are a forward-thinking IT company transforming businesses through innovative technology. 
+                  At G.R Minds, we are a forward-thinking IT company transforming businesses through innovative technology. 
                   Our team of skilled developers, designers, and consultants is passionate about building scalable and secure digital solutions.
                 </p>
                 <p className="text-lg text-muted-foreground mb-4">
@@ -137,7 +137,7 @@ const About = () => {
         <ScrollReveal direction="up">
           <div className="text-center mt-20">
             <h3 className="text-3xl font-semibold mb-4 glow-text">
-              Partner with G.R. Minds
+              Partner with G.R Minds
             </h3>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
               Whether you are a startup or an established business, we provide end-to-end IT solutions to transform your ideas into impactful digital products. 

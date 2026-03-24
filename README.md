@@ -1,6 +1,6 @@
-# G.R. Minds Technologies
+# G.R Minds Technologies
 
-Welcome to **G.R. Minds Technologies** – transforming ideas into digital reality through innovation, excellence, and scalable technology solutions. This is a modern, interactive website built using **React**, **Framer Motion**, and **Tailwind CSS**, designed to showcase services, team, and solutions for IT businesses.
+Welcome to **G.R Minds Technologies** – transforming ideas into digital reality through innovation, excellence, and scalable technology solutions. This is a modern, interactive website built using **React**, **Framer Motion**, and **Tailwind CSS**, designed to showcase services, team, and solutions for IT businesses.
 
 ---
 
