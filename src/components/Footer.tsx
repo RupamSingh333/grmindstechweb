@@ -59,7 +59,7 @@ const Footer = () => {
               <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
                 <Twitter className="h-6 w-6" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
+              <a href="https://www.linkedin.com/company/g-r-minds-technologies/?viewAsMember=true" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
                 <Linkedin className="h-6 w-6" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">

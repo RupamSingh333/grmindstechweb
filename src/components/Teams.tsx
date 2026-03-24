@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
 import ScrollReveal from './ScrollReveal';
 import profile1 from '@/assets/rupamsingh.png';
-import profile2 from '@/assets/rupamsingh.png';
+import profile2 from '@/assets/gauravsir.jpeg';
 const teamMembers = [
     {
         name: 'Gaurav Upadhyay',
