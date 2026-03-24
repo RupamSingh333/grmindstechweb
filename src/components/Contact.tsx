@@ -46,7 +46,7 @@ const Contact = () => {
 
     const { name, email, subject, message } = formData;
 
-    const mailtoLink = `mailto:rupamkumar333@gmail.com?subject=${encodeURIComponent(
+    const mailtoLink = `mailto:info@grmindstech.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`

@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="flex flex-col items-start">
             <img 
               src={logo} 
-              alt="G.R Minds Technologies" 
+              alt="G.R. Minds Technologies" 
               className="h-20 w-auto mb-4 hover:scale-105 transition-transform duration-300" 
             />
             <p className="text-sm text-muted-foreground max-w-xs">
@@ -59,7 +59,7 @@ const Footer = () => {
               <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
                 <Twitter className="h-6 w-6" />
               </a>
-              <a href="https://www.linkedin.com/company/g-r-minds-technologies/?viewAsMember=true" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
                 <Linkedin className="h-6 w-6" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
@@ -75,7 +75,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="border-t border-border/20 pt-8 text-center text-sm text-muted-foreground">
           <p>
-            &copy; 2026 <span className="text-primary font-semibold">G.R Minds Technologies</span>. All rights reserved.
+            &copy; 2026 <span className="text-primary font-semibold">G.R. Minds Technologies</span>. All rights reserved.
           </p>
         </div>
       </div>
