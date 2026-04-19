@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo-big-transparent.png';
 import ThemeToggle from './ThemeToggle';
 import PrivacyModal from './PrivacyModal';
 

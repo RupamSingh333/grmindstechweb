@@ -1,6 +1,6 @@
 import { Github, Linkedin, Twitter, Mail, Phone } from 'lucide-react';
 import PrivacyModal from './PrivacyModal';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo-big-transparent.png';
 import { useState, useEffect } from 'react';
 
 const Footer = () => {
