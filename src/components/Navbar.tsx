@@ -97,13 +97,13 @@ const Navbar = () => {
                 {link.charAt(0).toUpperCase() + link.slice(1)}
               </button>
             ))}
-            <Button
+            {/* <Button
               size="md"
               className="bg-primary text-background hover:bg-primary/80 transition-colors mt-4"
               onClick={() => scrollToSection('contact')}
             >
               Get Started
-            </Button>
+            </Button> */}
           </motion.div>
         )}
       </AnimatePresence>
