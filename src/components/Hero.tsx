@@ -2,13 +2,30 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { AnimatedSphere, FloatingCubes } from './Scene3D';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Button } from './ui/button';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.jpg';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const Hero = () => {
   const sectionRef = useRef(null);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"]
@@ -23,7 +40,7 @@ const Hero = () => {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24"
     >
-      {/* Background Image with Overlay - Parallax */}
+      {/* Background */}
       <motion.div
         className="absolute inset-0 z-0"
         style={{
@@ -33,19 +50,25 @@ const Hero = () => {
           scale,
         }}
       >
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+        {/* 🔥 Fixed overlay */}
+        <div className="absolute inset-0 
+          bg-white/40 dark:bg-background/70 
+          backdrop-blur-[2px] md:backdrop-blur-sm
+          transition-all duration-500" /> 
       </motion.div>
 
       {/* 3D Scene */}
       <div className="absolute inset-0 z-10">
         <Canvas>
-          <PerspectiveCamera makeDefault position={[0, 0, 6]} />
+          <PerspectiveCamera makeDefault position={[0, 0, 7]} />
           <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <pointLight position={[-10, -10, -10]} color="#06b6d4" intensity={0.5} />
-          <AnimatedSphere />
-          <FloatingCubes />
+
+          <ambientLight intensity={isDark ? 0.5 : 1.2} />
+          <pointLight position={[10, 10, 10]} intensity={isDark ? 1 : 2} />
+          <pointLight position={[-10, -10, -10]} color="#06b6d4" intensity={isDark ? 0.5 : 1} />
+
+          <AnimatedSphere isDark={isDark} />
+          <FloatingCubes isDark={isDark} />
         </Canvas>
       </div>
 
@@ -55,69 +78,41 @@ const Hero = () => {
         style={{ y, opacity }}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6 glow-text"
-              animate={{
-                textShadow: [
-                  "0 0 20px rgba(14, 165, 233, 0.5)",
-                  "0 0 40px rgba(14, 165, 233, 0.8)",
-                  "0 0 20px rgba(14, 165, 233, 0.5)",
-                ]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              G.R Minds Technologies
-            </motion.h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Transforming Ideas Into Digital Reality Through Innovation & Excellence
-            </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button size="lg" className="group animate-glow">
-              Get Started
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="glass-card">
-              Our Services
-            </Button>
-          </motion.div>
+          <h1 className="
+            text-5xl md:text-7xl font-bold mb-6
+            text-gray-900 dark:text-foreground
+            bg-gradient-to-r from-blue-600 to-cyan-500
+            dark:bg-none
+            bg-clip-text text-transparent
+            dark:text-foreground
+          ">
+            G.R Minds Technologies
+          </h1>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="mt-16"
-          >
+          <p className="text-lg md:text-2xl text-gray-700 dark:text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Transforming Ideas Into Digital Reality Through Innovation & Excellence
+          </p>
+
+          <div className="mt-16">
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="inline-flex flex-col items-center gap-2 text-muted-foreground cursor-pointer"
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex flex-col items-center gap-2   text-gray-600 dark:text-muted-foreground cursor-pointer"
+              onClick={() => {
+                const section = document.getElementById('services');
+                section?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               <span className="text-sm">Scroll to explore</span>
               <ChevronDown className="h-6 w-6" />
             </motion.div>
-          </motion.div>
+          </div>
+
         </div>
       </motion.div>
 
-      {/* Gradient Overlay */}
+      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
     </section>
   );

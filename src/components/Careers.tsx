@@ -93,9 +93,12 @@ const Career = () => {
                                     </p>
                                 </div>
 
-                                <button className="bg-primary text-background px-5 py-2 rounded-md hover:bg-primary/80 transition">
+                                <a
+                                    href={`mailto:info@grmindstech.com?subject=Application for ${job.title}&body=Hi G.R Minds Team,%0D%0A%0D%0AI would like to apply for the ${job.title} position.%0D%0APlease find my resume attached.%0D%0A%0D%0AThanks`}
+                                    className="bg-primary text-background px-5 py-2 rounded-md hover:bg-primary/80 transition text-center"
+                                >
                                     Apply Now
-                                </button>
+                                </a>
                             </motion.div>
                         ))}
                     </div>
@@ -107,7 +110,7 @@ const Career = () => {
                         Don’t see a role that fits you?
                     </p>
                     <a
-                        href="mailto:info@grminds.tech"
+                        href={`mailto:info@grmindstech.com?subject=Application for Open Position&body=Hi G.R Minds Team,%0D%0A%0D%0AI am interested in the open position.%0D%0APlease find my resume attached.%0D%0A%0D%0AThanks`}
                         className="text-primary font-medium hover:underline"
                     >
                         Send us your resume
