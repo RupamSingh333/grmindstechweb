@@ -19,9 +19,12 @@ const Hero = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24"
+    >
       {/* Background Image with Overlay - Parallax */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(${heroBg})`,
@@ -47,7 +50,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <motion.div 
+      <motion.div
         className="relative z-20 container mx-auto px-4"
         style={{ y, opacity }}
       >
@@ -57,19 +60,19 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-5xl md:text-7xl font-bold mb-6 glow-text"
-              animate={{ 
+              animate={{
                 textShadow: [
                   "0 0 20px rgba(14, 165, 233, 0.5)",
                   "0 0 40px rgba(14, 165, 233, 0.8)",
                   "0 0 20px rgba(14, 165, 233, 0.5)",
                 ]
               }}
-              transition={{ 
-                duration: 2, 
+              transition={{
+                duration: 2,
                 repeat: Infinity,
-                ease: "easeInOut" 
+                ease: "easeInOut"
               }}
             >
               G.R Minds Technologies

@@ -2,10 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Minimal App.css (Tailwind handles everything) */
 
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Design System (HSL आधारित colors) */
 @layer base {
   :root {
     --background: 222 47% 5%;
@@ -37,73 +42,29 @@ All colors MUST be HSL.
     --ring: 199 89% 48%;
 
     --radius: 0.75rem;
-    
+
+    /* Custom UI Tokens */
     --neon-cyan: 189 97% 55%;
     --neon-blue: 217 91% 60%;
-    --glass-bg: 222 47% 8% / 0.5;
-    --glow-primary: 199 89% 48% / 0.3;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --glass-bg: hsl(222 47% 8% / 0.5);
+    --glow-primary: hsl(199 89% 48% / 0.3);
   }
 
   .dark {
     --background: 222 47% 5%;
     --foreground: 210 40% 98%;
-
     --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 5%;
-
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 5%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
     --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 199 89% 48%;
-    
-    --neon-cyan: 189 97% 55%;
-    --neon-blue: 217 91% 60%;
-    --glass-bg: 222 47% 8% / 0.5;
-    --glow-primary: 199 89% 48% / 0.3;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
   }
 
   html {
@@ -111,19 +72,28 @@ All colors MUST be HSL.
   }
 }
 
+/* Custom Utilities */
 @layer utilities {
   .glass-card {
     @apply bg-card/50 backdrop-blur-xl border border-border/50;
   }
-  
+
+  .glass-bg {
+    background: hsl(var(--glass-bg));
+  }
+
   .glow-text {
     text-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.5),
-                 0 0 40px hsl(var(--neon-cyan) / 0.3);
+      0 0 40px hsl(var(--neon-cyan) / 0.3);
   }
-  
+
   .glow-border {
     box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
-                inset 0 0 20px hsl(var(--primary) / 0.1);
+      inset 0 0 20px hsl(var(--primary) / 0.1);
+  }
+
+  .logo-glow {
+    filter: drop-shadow(0 0 10px hsl(var(--primary) / 0.5));
   }
 
   .animate-float {
@@ -131,14 +101,17 @@ All colors MUST be HSL.
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-20px);
     }
   }
-  
+
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
   }
@@ -146,13 +119,12 @@ All colors MUST be HSL.
   @keyframes glow {
     from {
       box-shadow: 0 0 10px hsl(var(--primary) / 0.2),
-                  0 0 20px hsl(var(--primary) / 0.2),
-                  0 0 30px hsl(var(--primary) / 0.2);
+        0 0 20px hsl(var(--primary) / 0.2);
     }
+
     to {
       box-shadow: 0 0 20px hsl(var(--primary) / 0.4),
-                  0 0 30px hsl(var(--primary) / 0.4),
-                  0 0 40px hsl(var(--primary) / 0.4);
+        0 0 40px hsl(var(--primary) / 0.4);
     }
   }
 }

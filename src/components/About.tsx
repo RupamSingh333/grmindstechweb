@@ -47,12 +47,12 @@ const values = [
 ];
 
 const stats = [
-  { value: '100+', label: 'Projects Delivered' },
-  { value: '50+', label: 'Happy Clients' },
-  { value: '15+', label: 'Team Members' },
-  { value: '5+', label: 'Years Experience' },
+  { value: '15+', label: 'Projects Delivered' },
+  { value: '15+', label: 'Happy Clients' },
+  { value: '5+', label: 'Team Members' },
+  { value: '7+', label: 'Years Experience' },
   { value: '200K+', label: 'Lines of Code Written' },
-  { value: '30+', label: 'Industries Served' },
+  { value: '10+', label: 'Industries Served' },
 ];
 
 const About = () => {

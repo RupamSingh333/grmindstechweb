@@ -6,6 +6,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 import Team from '@/components/Teams';
+import Career from '@/components/Careers';
 
 
 const Index = () => {
@@ -27,6 +28,9 @@ const Index = () => {
       </div>
       <div id="contact">
         <Contact />
+      </div>
+      <div className="careers">
+        <Career />
       </div>
       <Footer />
     </div>

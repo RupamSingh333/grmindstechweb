@@ -24,17 +24,16 @@ const Navbar = () => {
     }
   };
 
-  const navLinks = ['home', 'services','teams', 'about', 'contact'];
+  const navLinks = ['home', 'services', 'teams', 'about','careers', 'contact'];
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/70 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-background/70 backdrop-blur-md shadow-lg'
+        : 'bg-transparent'
+        }`}
     >
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between h-20">
@@ -42,7 +41,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="G.R Minds Technologies"
-            className="h-14 w-auto cursor-pointer hover:scale-105 transition-transform duration-300"
+            className="h-12 sm:h-14 md:h-18 lg:h-20 w-auto mt-1 cursor-pointer hover:scale-105 transition-transform duration-300"
             onClick={() => scrollToSection('home')}
           />
 
@@ -57,13 +56,13 @@ const Navbar = () => {
                 {link.charAt(0).toUpperCase() + link.slice(1)}
               </button>
             ))}
-            <Button
+            {/* <Button
               size="sm"
               className="ml-4 bg-primary text-background hover:bg-primary/80 transition-colors"
               onClick={() => scrollToSection('contact')}
             >
               Get Started
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}

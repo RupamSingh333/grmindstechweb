@@ -46,7 +46,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="hover:text-primary transition-colors cursor-pointer">About Us</li>
               <li className="hover:text-primary transition-colors cursor-pointer">Careers</li>
-              <li className="hover:text-primary transition-colors cursor-pointer">Blog</li>
+              {/* <li className="hover:text-primary transition-colors cursor-pointer">Blog</li> */}
               <li className="hover:text-primary transition-colors cursor-pointer">Contact</li>
               <li className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
             </ul>
@@ -56,13 +56,13 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-primary">Follow Us</h4>
             <div className="flex gap-5 mb-6">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
-                <Twitter className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
+              <a href="https://www.linkedin.com/company/g-r-minds-technologies" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
                 <Linkedin className="h-6 w-6" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
+              <a href="https://twitter.com/g_rminds" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
+                <Twitter className="h-6 w-6" />
+              </a>
+              <a href="https://github.com/g-r-minds" className="text-muted-foreground hover:text-primary transition-transform transform hover:scale-125">
                 <Github className="h-6 w-6" />
               </a>
             </div>
