@@ -17,20 +17,31 @@ const Preloader = () => {
     <AnimatePresence>
       {loading && (
         <motion.div
-          initial={{ opacity: 1 }}
+          initial={{
+            opacity: 1,
+            clipPath: "ellipse(180% 120% at 50% 100%)"
+          }}
+          animate={{
+            opacity: 1,
+            clipPath: "ellipse(180% 120% at 50% 100%)"
+          }}
           exit={{
             y: "-100%",
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+            clipPath: "ellipse(180% 0% at 50% 0%)",
+            transition: {
+              duration: 1.5,
+              ease: [0.16, 1, 0.3, 1], // ultra smooth
+            }
           }}
           className="fixed inset-0 z-[9999] bg-[#030712]"
         >
-          {/* FORCE PERFECT CENTER */}
+          {/* CENTER */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
 
-            {/* LOGO AREA */}
+            {/* LOGO */}
             <div className="relative flex flex-col items-center">
 
-              {/* Glow (Improved) */}
+              {/* Glow */}
               <motion.div
                 animate={{
                   scale: [0.9, 1.15, 1],
@@ -51,7 +62,7 @@ const Preloader = () => {
               />
             </div>
 
-            {/* CONTENT (Reduced spacing for mobile) */}
+            {/* CONTENT */}
             <div className="mt-6 sm:mt-8 flex flex-col items-center">
 
               {/* Progress Bar */}
@@ -59,7 +70,11 @@ const Preloader = () => {
                 <motion.div
                   initial={{ x: "-100%" }}
                   animate={{ x: "100%" }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
                   className="h-full w-1/2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
                 />
               </div>
@@ -75,7 +90,7 @@ const Preloader = () => {
             </div>
           </div>
 
-          {/* Background Grid (lighter) */}
+          {/* GRID */}
           <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:35px_35px]" />
         </motion.div>
       )}
