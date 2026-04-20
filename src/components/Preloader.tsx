@@ -18,22 +18,23 @@ const Preloader = () => {
       {loading && (
         <motion.div
           initial={{
-            opacity: 1,
-            clipPath: "ellipse(180% 120% at 50% 100%)"
+            clipPath: "ellipse(180% 120% at 50% 100%)", // big curve at bottom
           }}
           animate={{
-            opacity: 1,
-            clipPath: "ellipse(180% 120% at 50% 100%)"
+            clipPath: "ellipse(180% 120% at 50% 100%)", // stays same while visible
           }}
           exit={{
-            y: "-100%",
-            clipPath: "ellipse(180% 0% at 50% 0%)",
+            clipPath: [
+              "ellipse(180% 120% at 50% 100%)", // start (bottom curve visible)
+              "ellipse(120% 90% at 50% 0%)",   // moving upward
+              "ellipse(100% 0% at 50% 0%)"      // disappears at top
+            ],
             transition: {
-              duration: 1.5,
-              ease: [0.16, 1, 0.3, 1], // ultra smooth
+              duration: 2,
+              ease: [0.76, 0, 0.24, 1],
             }
           }}
-          className="fixed inset-0 z-[9999] bg-[#030712]"
+          className="fixed inset-0 z-[9999] bg-[#F5F5F5] dark:bg-[#030712] flex items-center justify-center"
         >
           {/* CENTER */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">

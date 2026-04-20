@@ -8,6 +8,7 @@ import {
   useInView,
 } from "framer-motion";
 import { ArrowRight, Code, Sparkles, Zap, Shield, Rocket, Globe, Smartphone } from "lucide-react";
+import { Typewriter } from "react-simple-typewriter"; // ✅ added
 
 const Hero = () => {
   const containerRef = useRef(null);
@@ -49,11 +50,9 @@ const Hero = () => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "circOut" } },
   };
 
-
   const handleNavClick = (linkId: string) => {
     const element = document.getElementById(linkId);
     if (element) {
-      // Offset for the sticky header height
       const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
@@ -62,11 +61,10 @@ const Hero = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
-  }
-
+  };
 
   return (
     <section
@@ -78,12 +76,11 @@ const Hero = () => {
     >
       {/* --- BACKGROUND ANIMATIONS --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Floating Geometric Shapes (Animated for mobile/desktop) */}
         <motion.div
           animate={{
             y: [0, -20, 0],
             rotate: [0, 10, 0],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-[15%] left-[10%] w-32 h-32 md:w-64 md:h-64 bg-cyan-500/10 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-3xl"
@@ -92,16 +89,15 @@ const Hero = () => {
           animate={{
             y: [0, 20, 0],
             x: [0, 15, 0],
-            rotate: [0, -10, 0]
+            rotate: [0, -10, 0],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           className="absolute bottom-[20%] right-[5%] w-40 h-40 md:w-80 md:h-80 bg-indigo-500/10 rounded-full blur-3xl"
         />
 
-        {/* Tech Mesh Grid */}
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none 
-  [background-image:radial-gradient(#ffffff10_1px,transparent_1px)] 
-  [background-size:3px_3px]" />
+        [background-image:radial-gradient(#ffffff10_1px,transparent_1px)] 
+        [background-size:3px_3px]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]" />
       </div>
 
@@ -121,6 +117,7 @@ const Hero = () => {
         style={{ y: textY, opacity: opacityFade }}
         className="relative z-10 container mx-auto px-6 text-center"
       >
+        {/* Badge */}
         {/* Animated Badge */}
         <motion.div variants={itemVariants} className="flex justify-center mb-6 md:mb-10">
           <motion.div
@@ -137,45 +134,45 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Responsive Typography */}
+        {/* Heading */}
         <motion.div variants={itemVariants} className="mb-6 md:mb-10">
           <h1 className="text-5xl sm:text-7xl md:text-[120px] font-black tracking-tighter leading-[0.8] text-slate-900 dark:text-white">
             G.R MINDS <br />
-            <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-blue-500 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-x">
-              TECHNOLOGIES
+            <span className="mt-1 inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-blue-500 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-x">
+              <Typewriter
+                words={["TECHNOLOGIES", "INNOVATION", "EXCELLENCE", "FUTURE-READY"]}
+                loop={false}
+                cursor
+                cursorStyle="|"
+                typeSpeed={100}
+              />
             </span>
           </h1>
         </motion.div>
 
-        {/* Subtitle */}
-        <motion.p
+        {/* Marquee Subtitle */}
+        <motion.div
           variants={itemVariants}
-          className="text-base md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 md:mb-14 px-4 leading-relaxed"
+          className="relative overflow-hidden w-full mb-10 md:mb-14 group"
         >
-          Engineering <span className="text-cyan-500 font-semibold italic">scalable</span> solutions for a connected world. We turn bold ideas into high-performance reality.
-        </motion.p>
+          <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-[#fafafa] dark:from-[#030712] to-transparent z-10" />
+          <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-[#fafafa] dark:from-[#030712] to-transparent z-10" />
 
-        {/* Action Buttons (Mobile Stackable) */}
-        {/* <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 mb-16 md:mb-24">
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(6, 182, 212, 0.25)" }}
-            whileTap={{ scale: 0.95 }}
-            onClick={()=>handleNavClick('contact')}
-            className="w-full sm:w-auto px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 group transition-all"
-          >
-            Start Project <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+          <div className="flex whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused] gap-10">
+            {[...Array(2)].map((_, i) => (
+              <span
+                key={i}
+                className="text-base md:text-2xl text-slate-600 dark:text-slate-400 px-4"
+              >
+                Engineering{" "}
+                <span className="text-cyan-500 font-semibold italic">scalable</span>{" "}
+                solutions for a connected world. We turn bold ideas into high-performance reality.
+              </span>
+            ))}
+          </div>
+        </motion.div>
 
-          <motion.button
-            whileHover={{ backgroundColor: "rgba(0,0,0,0.05)" }}
-            onClick={()=>handleNavClick('contact')}
-            className="w-full sm:w-auto px-10 py-5 text-slate-900 dark:text-white font-bold border-2 border-slate-200 dark:border-slate-800 rounded-2xl transition-all"
-          >
-            View Work
-          </motion.button>
-        </motion.div> */}
-
-        {/* Mobile-Responsive Grid (Becomes 2x2 on Mobile) */}
+        {/* Cards (UNCHANGED) */}
         <motion.div
           variants={itemVariants}
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-2"
@@ -189,29 +186,18 @@ const Hero = () => {
             <motion.div
               key={i}
               whileHover={{ y: -5 }}
-              className="p-4 md:p-6 rounded-2xl bg-white/40 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 backdrop-blur-md text-left flex flex-col gap-2 md:gap-4 group cursor-default"
+              className="p-4 md:p-6 rounded-2xl bg-white/40 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 backdrop-blur-md text-left flex flex-col gap-2 md:gap-4"
             >
-              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center ${card.color} transition-transform group-hover:rotate-12`}>
+              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center ${card.color}`}>
                 {card.icon}
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm md:text-base">{card.title}</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">{card.desc}</p>
+                <h3 className="font-bold text-sm md:text-base">{card.title}</h3>
+                <p className="text-xs">{card.desc}</p>
               </div>
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
-
-      {/* --- FLOATING SCROLL CUE --- */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        className="hidden md:flex absolute bottom-8 flex-col items-center gap-2"
-      >
-        <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Explore</span>
-        <div className="w-[2px] h-12 bg-gradient-to-b from-cyan-500 to-transparent" />
       </motion.div>
     </section>
   );

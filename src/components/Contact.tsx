@@ -46,11 +46,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 md:py-32 px-4 md:px-6 overflow-hidden bg-slate-50 dark:bg-[#030712]">
+    <section id="contact" className="relative py-20 md:py-20 px-4 md:px-6 overflow-hidden bg-slate-50 dark:bg-[#030712] inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] ">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="container mx-auto max-w-8xl relative z-10">
         
         {/* --- HEADER --- */}
         <ScrollReveal direction="up">

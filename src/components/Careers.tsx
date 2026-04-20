@@ -25,11 +25,11 @@ const jobs = [
 
 const Career = () => {
   return (
-    <section className="relative py-32 px-6 overflow-hidden bg-white dark:bg-[#030712]" id="careers">
+    <section className="relative py-20 px-6 overflow-hidden bg-white dark:bg-[#030712]  inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] " id="careers">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.03)_0%,transparent_50%)] pointer-events-none" />
 
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-8xl relative z-10">
 
         {/* --- HEADING --- */}
         <ScrollReveal direction="up">
@@ -110,7 +110,7 @@ const Career = () => {
 
         {/* --- FOOTER CTA --- */}
         <ScrollReveal direction="up">
-          <div className="text-center mt-24 p-12 rounded-[40px] bg-slate-100 dark:bg-white/[0.03] border border-dashed border-slate-300 dark:border-white/10">
+          <div className="backdrop-blur-xl text-center mt-24 p-12 rounded-[40px] bg-slate-100 dark:bg-white/[0.03] border border-dashed border-slate-300 dark:border-white/10">
             <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-4">
               Don’t see your dream role?
             </h3>

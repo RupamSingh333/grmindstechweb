@@ -4,10 +4,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Lenis from "@studio-freight/lenis"; // ✅ ADD THIS
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import Preloader from "./components/Preloader";
+import CustomCursor from "./components/CustomCursor";
 
 const queryClient = new QueryClient();
 
@@ -15,26 +17,46 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // We set a slightly longer timeout than the Preloader's exit 
-    // to ensure the scroll-to-top works perfectly after the curtain lifts
+    // ✅ PRELOADER TIMER
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2800);
 
-    return () => clearTimeout(timer);
+    // ✅ LENIS SETUP
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      smooth: true,
+      smoothTouch: false,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      clearTimeout(timer);
+      lenis.destroy(); // cleanup
+    };
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {/* --- 1. PRELOADER (Always outside the Router to avoid route changes) --- */}
+
+        {/* PRELOADER */}
         <Preloader />
+        <CustomCursor /> {/* 👈 ADD HERE */}
 
         <Toaster />
         <Sonner />
 
-        {/* --- 2. MAIN CONTENT --- */}
+        {/* MAIN CONTENT */}
         <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+
           <HashRouter>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -42,7 +64,6 @@ const App = () => {
             </Routes>
           </HashRouter>
 
-          {/* WhatsApp Float usually looks better when shown after preloader */}
           {!isLoading && <WhatsAppFloat />}
         </div>
 
