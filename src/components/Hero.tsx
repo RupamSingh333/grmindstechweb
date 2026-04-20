@@ -99,7 +99,9 @@ const Hero = () => {
         />
 
         {/* Tech Mesh Grid */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none 
+  [background-image:radial-gradient(#ffffff10_1px,transparent_1px)] 
+  [background-size:3px_3px]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]" />
       </div>
 

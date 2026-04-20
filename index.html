@@ -84,8 +84,9 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
-    gtag('config', 'G-K55R7WXCNM');
+    if (location.hostname !== "localhost") {
+      gtag('config', 'G-K55R7WXCNM');
+    }
   </script>
 
 
