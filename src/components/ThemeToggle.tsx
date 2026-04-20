@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  // console.log('theme: ', theme);
 
   // Load saved theme
   useEffect(() => {
