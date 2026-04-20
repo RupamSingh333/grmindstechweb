@@ -49,6 +49,25 @@ const Hero = () => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "circOut" } },
   };
 
+
+  const handleNavClick = (linkId: string) => {
+    const element = document.getElementById(linkId);
+    if (element) {
+      // Offset for the sticky header height
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+
   return (
     <section
       ref={containerRef}
@@ -61,7 +80,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Floating Geometric Shapes (Animated for mobile/desktop) */}
         <motion.div
-          animate={{ 
+          animate={{
             y: [0, -20, 0],
             rotate: [0, 10, 0],
             scale: [1, 1.1, 1]
@@ -70,7 +89,7 @@ const Hero = () => {
           className="absolute top-[15%] left-[10%] w-32 h-32 md:w-64 md:h-64 bg-cyan-500/10 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-3xl"
         />
         <motion.div
-          animate={{ 
+          animate={{
             y: [0, 20, 0],
             x: [0, 15, 0],
             rotate: [0, -10, 0]
@@ -102,7 +121,7 @@ const Hero = () => {
       >
         {/* Animated Badge */}
         <motion.div variants={itemVariants} className="flex justify-center mb-6 md:mb-10">
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-xl shadow-cyan-500/5"
           >
@@ -135,25 +154,27 @@ const Hero = () => {
         </motion.p>
 
         {/* Action Buttons (Mobile Stackable) */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 mb-16 md:mb-24">
-          <motion.button 
+        {/* <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 mb-16 md:mb-24">
+          <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(6, 182, 212, 0.25)" }}
             whileTap={{ scale: 0.95 }}
+            onClick={()=>handleNavClick('contact')}
             className="w-full sm:w-auto px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 group transition-all"
           >
             Start Project <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
-          
-          <motion.button 
-             whileHover={{ backgroundColor: "rgba(0,0,0,0.05)" }}
-             className="w-full sm:w-auto px-10 py-5 text-slate-900 dark:text-white font-bold border-2 border-slate-200 dark:border-slate-800 rounded-2xl transition-all"
+
+          <motion.button
+            whileHover={{ backgroundColor: "rgba(0,0,0,0.05)" }}
+            onClick={()=>handleNavClick('contact')}
+            className="w-full sm:w-auto px-10 py-5 text-slate-900 dark:text-white font-bold border-2 border-slate-200 dark:border-slate-800 rounded-2xl transition-all"
           >
             View Work
           </motion.button>
-        </motion.div>
+        </motion.div> */}
 
         {/* Mobile-Responsive Grid (Becomes 2x2 on Mobile) */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-2"
         >
@@ -181,7 +202,7 @@ const Hero = () => {
       </motion.div>
 
       {/* --- FLOATING SCROLL CUE --- */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}

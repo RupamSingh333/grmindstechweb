@@ -23,7 +23,7 @@ const Navbar = () => {
     { name: 'teams', id: 'teams' },
     { name: 'careers', id: 'careers' },
     { name: 'contact', id: 'contact' },
-    { name: 'privacy', id: 'privacy' },
+    // { name: 'privacy', id: 'privacy' },
   ];
 
   const handleNavClick = (linkId: string) => {
