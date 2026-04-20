@@ -3,54 +3,62 @@ import { Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-  // console.log('theme: ', theme);
-
-  // Load saved theme
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+  // Initialize state directly from localStorage or default to 'dark'
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      return (saved as 'light' | 'dark') || 'dark';
     }
-  }, []);
+    return 'dark';
+  });
 
-  // Toggle theme
+  // Apply theme class on mount and whenever theme changes
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="relative flex items-center justify-center h-10 w-10 rounded-full bg-muted hover:bg-muted/70 transition"
+      className="relative flex items-center justify-center h-10 w-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-md overflow-hidden group"
+      aria-label="Toggle Theme"
     >
       <AnimatePresence mode="wait" initial={false}>
         {theme === 'dark' ? (
           <motion.div
             key="moon"
-            initial={{ rotate: -90, scale: 0 }}
-            animate={{ rotate: 0, scale: 1 }}
-            exit={{ rotate: 90, scale: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ y: 30, opacity: 0, rotate: 45 }}
+            animate={{ y: 0, opacity: 1, rotate: 0 }}
+            exit={{ y: -30, opacity: 0, rotate: -45 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
-            <Moon className="h-5 w-5 text-primary" />
+            <Moon className="h-5 w-5 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]" />
           </motion.div>
         ) : (
           <motion.div
             key="sun"
-            initial={{ rotate: 90, scale: 0 }}
-            animate={{ rotate: 0, scale: 1 }}
-            exit={{ rotate: -90, scale: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ y: 30, opacity: 0, rotate: -45 }}
+            animate={{ y: 0, opacity: 1, rotate: 0 }}
+            exit={{ y: -30, opacity: 0, rotate: 45 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
-            <Sun className="h-5 w-5 text-yellow-400" />
+            <Sun className="h-5 w-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]" />
           </motion.div>
         )}
       </AnimatePresence>
+      
+      {/* Subtle Background Glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
     </button>
   );
 };
