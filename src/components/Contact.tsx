@@ -17,7 +17,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Phone',
-    value: '+91 75057 17444',
+    value: ['+91 75057 17444', ', +91 85389 45025'], // ✅ added new number
   },
   {
     icon: MapPin,
