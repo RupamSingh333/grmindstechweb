@@ -1,112 +1,139 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
+import { Linkedin, Mail, ExternalLink, ShieldCheck } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import profile1 from '@/assets/rupamsingh.png';
 import profile2 from '@/assets/gauravsir.jpeg';
+
 const teamMembers = [
-    {
-        name: 'Gaurav Upadhyay',
-        role: 'Founder & Senior Software Engineer',
-        experience: '8+ Years Experience in IT Development',
-        image: profile2, // 👉 add your image here
-        description:
-            'A visionary leader with over 8 years of experience in IT development, specializing in scalable systems, backend architecture, and enterprise solutions. Passionate about building reliable and future-ready technology.',
-    },
-    {
-        name: 'Rupam Singh',
-        role: 'Co-Founder & Full Stack Developer',
-        experience: '5+ Years Experience in Web & Mobile Development',
-        image: profile1, // 👉 add your image here
-        description:
-            'A versatile developer with expertise in web and mobile technologies. Focused on creating high-performance applications, modern UI/UX, and delivering complete digital solutions from idea to execution.',
-    },
+  {
+    name: 'Gaurav Upadhyay',
+    role: 'Founder & Senior Software Engineer',
+    experience: '8+ Years in Enterprise Architecture',
+    image: profile2,
+    accent: 'from-cyan-500 to-blue-600',
+    description:
+      'A visionary leader specializing in scalable systems and backend architecture. Gaurav drives the technical strategy, ensuring every solution is built for future-ready performance.',
+  },
+  {
+    name: 'Rupam Singh',
+    role: 'Co-Founder & Full Stack Developer',
+    experience: '5+ Years in Web & Mobile Systems',
+    image: profile1,
+    accent: 'from-purple-500 to-indigo-600',
+    description:
+      'A versatile developer focused on high-performance applications and modern UI/UX. Rupam bridges the gap between complex logic and seamless user experience.',
+  },
 ];
 
 const Team = () => {
-    return (
-        <section className="py-24 px-4 relative" id="teams">
-            <div className="container mx-auto max-w-6xl">
+  return (
+    <section className="py-32 px-6 relative overflow-hidden bg-slate-50 dark:bg-[#030712]" id="teams">
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-cyan-500/5 blur-[120px] rounded-full rotate-12 pointer-events-none" />
 
-                {/* Heading */}
-                <ScrollReveal direction="up">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-text">
-                            Meet Our Leadership
-                        </h2>
-                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                            Driven by innovation and experience, our leadership team is committed
-                            to delivering powerful and scalable digital solutions that help businesses grow.
-                        </p>
+      <div className="container mx-auto max-w-6xl relative z-10">
+        
+        {/* --- HEADING --- */}
+        <ScrollReveal direction="up">
+          <div className="text-center mb-24">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-500 text-xs font-bold uppercase tracking-[0.2em]"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span>Expert Leadership</span>
+            </motion.div>
+            
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-slate-900 dark:text-white leading-[0.9]">
+              THE MINDS <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">BEHIND THE TECH</span>
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        {/* --- TEAM CARDS --- */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+          {teamMembers.map((member, index) => (
+            <ScrollReveal key={index} direction={index === 0 ? "left" : "right"}>
+              <motion.div
+                whileHover={{ y: -10 }}
+                className="group relative"
+              >
+                {/* Magnetic Glow Background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${member.accent} opacity-0 group-hover:opacity-10 blur-[80px] transition-all duration-700 rounded-[40px]`} />
+                
+                <Card className="glass-card border-slate-200/50 dark:border-white/10 rounded-[40px] overflow-hidden p-8 md:p-12 transition-all duration-500 hover:border-cyan-500/50">
+                  <div className="flex flex-col items-center text-center">
+                    
+                    {/* Profile Image with "Active" Pulse */}
+                    <div className="relative mb-8">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${member.accent} rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                      <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-slate-200 to-slate-100 dark:from-white/10 dark:to-white/5 shadow-2xl">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all duration-700"
+                        />
+                      </div>
+                      {/* Active Status Indicator */}
+                      <div className="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-4 border-white dark:border-[#030712] rounded-full animate-pulse" />
                     </div>
-                </ScrollReveal>
 
-                {/* Team Cards */}
-                <div className="grid md:grid-cols-2 gap-10">
-                    {teamMembers.map((member, index) => (
-                        <ScrollReveal key={index} direction="up">
-                            <motion.div
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.2 }}
-                                viewport={{ once: true }}
-                                whileHover={{ scale: 1.03 }}
-                            >
-                                <Card className="glass-card rounded-xl hover:bg-muted/20 transition-all p-6 text-center">
+                    <CardContent className="p-0">
+                      <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">
+                        {member.name}
+                      </h3>
+                      <div className="px-4 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-4 inline-block">
+                        {member.role}
+                      </div>
+                      
+                      <p className="text-sm font-bold text-slate-400 mb-6 italic tracking-wide">
+                        {member.experience}
+                      </p>
 
-                                    {/* Profile Image */}
-                                    <div className="flex justify-center mb-4">
-                                        <img
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-28 h-28 object-cover rounded-full border-4 border-primary/20 shadow-md hover:scale-105 transition-transform duration-300"
-                                        />
-                                    </div>
+                      <p className="text-base md:text-lg text-slate-500 dark:text-slate-400 leading-relaxed mb-8 font-medium">
+                        {member.description}
+                      </p>
 
-                                    <CardContent className="space-y-3 p-0">
-                                        {/* Name */}
-                                        <h3 className="text-xl font-semibold">
-                                            {member.name}
-                                        </h3>
+                      {/* Social Actions */}
+                      <div className="flex items-center justify-center gap-4">
+                        <motion.button whileHover={{ scale: 1.1 }} className="p-3 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors">
+                          <Linkedin size={20} />
+                        </motion.button>
+                        <motion.button whileHover={{ scale: 1.1 }} className="p-3 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors">
+                          <Mail size={20} />
+                        </motion.button>
+                        <motion.button whileHover={{ scale: 1.1 }} className="p-3 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors">
+                          <ExternalLink size={20} />
+                        </motion.button>
+                      </div>
+                    </CardContent>
+                  </div>
+                </Card>
+              </motion.div>
+            </ScrollReveal>
+          ))}
+        </div>
 
-                                        {/* Role */}
-                                        <p className="text-primary font-medium text-sm">
-                                            {member.role}
-                                        </p>
+        {/* --- BOTTOM QUOTE --- */}
+        <ScrollReveal direction="up">
+          <div className="mt-32 p-12 rounded-[50px] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+            <h3 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-6 tracking-tighter">
+              "WE BUILD SYSTEMS THAT SCALE WITH YOUR AMBITION"
+            </h3>
+            <p className="text-slate-500 dark:text-slate-400 max-w-3xl mx-auto text-lg leading-relaxed font-medium">
+              Our leadership combines years of deep technical expertise with a commitment to 
+              long-term partnerships. We don't just deliver products; we build the future of your business.
+            </p>
+          </div>
+        </ScrollReveal>
 
-                                        {/* Experience */}
-                                        <p className="text-xs text-muted-foreground">
-                                            {member.experience}
-                                        </p>
-
-                                        {/* Description */}
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {member.description}
-                                        </p>
-                                    </CardContent>
-                                </Card>
-                            </motion.div>
-                        </ScrollReveal>
-                    ))}
-                </div>
-
-                {/* Bottom Section */}
-                <ScrollReveal direction="up">
-                    <div className="text-center mt-20">
-                        <h3 className="text-2xl font-semibold mb-4">
-                            Building the Future Together
-                        </h3>
-                        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                            With a strong foundation in technology and innovation, our team combines
-                            experience, creativity, and dedication to deliver impactful digital products.
-                            We believe in long-term partnerships, continuous growth, and turning ideas
-                            into successful realities.
-                        </p>
-                    </div>
-                </ScrollReveal>
-
-            </div>
-        </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default Team;

@@ -1,125 +1,135 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Users, Rocket, Heart } from 'lucide-react';
+import { Briefcase, Users, Rocket, Heart, ArrowRight, Stars } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const jobs = [
-    {
-        title: 'Frontend Developer (React)',
-        type: 'Remote / Freelance',
-        description:
-            'Looking for a React developer with good understanding of modern UI, Tailwind, and API integration.',
-    },
-    {
-        title: 'Backend Developer (Node.js)',
-        type: 'Remote',
-        description:
-            'Seeking a Node.js developer familiar with REST APIs, databases, and scalable backend architecture.',
-    },
-    {
-        title: 'UI/UX Designer',
-        type: 'Part-Time',
-        description:
-            'Creative designer needed to craft modern, user-friendly interfaces for web and mobile apps.',
-    },
+  {
+    title: 'Frontend Developer (React)',
+    type: 'Remote / Freelance',
+    accent: 'from-cyan-500 to-blue-500',
+    description: 'Master of modern UI, Tailwind CSS, and Framer Motion. Help us craft liquid interfaces.',
+  },
+  {
+    title: 'Backend Developer (Node.js)',
+    type: 'Remote',
+    accent: 'from-purple-500 to-indigo-500',
+    description: 'Architecting scalable REST APIs and secure database structures for high-traffic apps.',
+  },
+  {
+    title: 'UI/UX Designer',
+    type: 'Part-Time',
+    accent: 'from-emerald-500 to-teal-500',
+    description: 'Transforming complex requirements into clean, user-centric, and futuristic design systems.',
+  },
 ];
 
 const Career = () => {
-    return (
-        <section className="py-24 px-4 bg-muted/5" id="careers">
-            <div className="container mx-auto max-w-6xl">
+  return (
+    <section className="relative py-32 px-6 overflow-hidden bg-white dark:bg-[#030712]" id="careers">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.03)_0%,transparent_50%)] pointer-events-none" />
 
-                {/* Heading */}
-                <ScrollReveal direction="up">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            Join <span className="glow-text">Our Team</span>
-                        </h2>
-                        <p className="text-muted-foreground max-w-2xl mx-auto">
-                            We are building a passionate team of developers and designers who love creating impactful digital products.
-                        </p>
-                    </div>
-                </ScrollReveal>
+      <div className="container mx-auto max-w-6xl relative z-10">
 
-                {/* Why Join Us */}
-                <div className="grid md:grid-cols-4 gap-6 mb-16">
-                    {[
-                        {
-                            icon: Rocket,
-                            title: 'Growth',
-                            desc: 'Work on real projects and grow your skills.',
-                        },
-                        {
-                            icon: Users,
-                            title: 'Team Culture',
-                            desc: 'Collaborative and supportive environment.',
-                        },
-                        {
-                            icon: Briefcase,
-                            title: 'Flexible Work',
-                            desc: 'Remote-friendly and flexible hours.',
-                        },
-                        {
-                            icon: Heart,
-                            title: 'Passion',
-                            desc: 'We value creativity and dedication.',
-                        },
-                    ].map((item, i) => (
-                        <motion.div
-                            key={i}
-                            whileHover={{ scale: 1.05 }}
-                            className="glass-card p-6 text-center rounded-lg"
-                        >
-                            <item.icon className="h-8 w-8 text-primary mx-auto mb-3" />
-                            <h3 className="font-semibold mb-1">{item.title}</h3>
-                            <p className="text-sm text-muted-foreground">{item.desc}</p>
-                        </motion.div>
-                    ))}
+        {/* --- HEADING --- */}
+        <ScrollReveal direction="up">
+          <div className="text-center mb-20">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-500 text-xs font-bold uppercase tracking-[0.2em]"
+            >
+              <Stars className="w-4 h-4" />
+              <span>We Are Hiring</span>
+            </motion.div>
+            
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-slate-900 dark:text-white leading-[0.9]">
+              JOIN THE <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600 animate-gradient-x">CREATIVE TRIBE</span>
+            </h2>
+            <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
+              We’re looking for radical thinkers and elite engineers to build the next generation of digital infrastructure.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* --- WHY JOIN US (BENTO GRID) --- */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+          {[
+            { icon: Rocket, title: 'Rapid Growth', color: 'text-orange-500' },
+            { icon: Users, title: 'True Culture', color: 'text-cyan-500' },
+            { icon: Briefcase, title: 'Flex Hours', color: 'text-purple-500' },
+            { icon: Heart, title: 'Passionate', color: 'text-red-500' },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -5, backgroundColor: "rgba(6, 182, 212, 0.05)" }}
+              className="glass-card p-6 md:p-8 text-center rounded-[32px] border border-slate-200 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02] backdrop-blur-md transition-all"
+            >
+              <item.icon className={`h-8 w-8 ${item.color} mx-auto mb-4`} />
+              <h3 className="font-bold text-slate-900 dark:text-white uppercase tracking-tighter text-sm md:text-base">{item.title}</h3>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* --- JOB LISTINGS --- */}
+        <div className="space-y-4">
+          {jobs.map((job, index) => (
+            <ScrollReveal key={index} direction="up" delay={index * 0.1}>
+              <motion.div
+                whileHover={{ x: 10 }}
+                className="group relative rounded-[32px] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 p-6 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 backdrop-blur-xl transition-all hover:border-cyan-500/50"
+              >
+                {/* Accent Line */}
+                <div className={`absolute left-0 top-1/4 bottom-1/4 w-1 bg-gradient-to-b ${job.accent} rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity`} />
+                
+                <div className="max-w-xl">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight">{job.title}</h3>
+                    <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-500 text-[10px] font-black uppercase tracking-widest">
+                      {job.type}
+                    </span>
+                  </div>
+                  <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                    {job.description}
+                  </p>
                 </div>
 
-                {/* Job Listings */}
-                <ScrollReveal direction="up">
-                    <div className="space-y-6">
-                        {jobs.map((job, index) => (
-                            <motion.div
-                                key={index}
-                                whileHover={{ scale: 1.02 }}
-                                className="glass-card p-6 rounded-lg flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-                            >
-                                <div>
-                                    <h3 className="text-xl font-semibold">{job.title}</h3>
-                                    <p className="text-sm text-primary mb-1">{job.type}</p>
-                                    <p className="text-muted-foreground text-sm">
-                                        {job.description}
-                                    </p>
-                                </div>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={`mailto:info@grminds.tech?subject=Application: ${job.title}`}
+                  className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 shadow-xl shadow-cyan-500/10"
+                >
+                  Apply Now <ArrowRight size={16} />
+                </motion.a>
+              </motion.div>
+            </ScrollReveal>
+          ))}
+        </div>
 
-                                <a
-                                    href={`mailto:info@grmindstech.com?subject=Application for ${job.title}&body=Hi G.R Minds Team,%0D%0A%0D%0AI would like to apply for the ${job.title} position.%0D%0APlease find my resume attached.%0D%0A%0D%0AThanks`}
-                                    className="bg-primary text-background px-5 py-2 rounded-md hover:bg-primary/80 transition text-center"
-                                >
-                                    Apply Now
-                                </a>
-                            </motion.div>
-                        ))}
-                    </div>
-                </ScrollReveal>
+        {/* --- FOOTER CTA --- */}
+        <ScrollReveal direction="up">
+          <div className="text-center mt-24 p-12 rounded-[40px] bg-slate-100 dark:bg-white/[0.03] border border-dashed border-slate-300 dark:border-white/10">
+            <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter mb-4">
+              Don’t see your dream role?
+            </h3>
+            <p className="text-slate-500 dark:text-slate-400 mb-8 max-w-xl mx-auto font-medium">
+              We are always looking for exceptional talent. Send us your portfolio and let's start a conversation.
+            </p>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              href="mailto:info@grminds.tech?subject=General Application"
+              className="text-cyan-500 font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-2 group hover:gap-4 transition-all"
+            >
+              Drop your CV <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </motion.a>
+          </div>
+        </ScrollReveal>
 
-                {/* No Openings CTA */}
-                <div className="text-center mt-16">
-                    <p className="text-muted-foreground mb-4">
-                        Don’t see a role that fits you?
-                    </p>
-                    <a
-                        href={`mailto:info@grmindstech.com?subject=Application for Open Position&body=Hi G.R Minds Team,%0D%0A%0D%0AI am interested in the open position.%0D%0APlease find my resume attached.%0D%0A%0D%0AThanks`}
-                        className="text-primary font-medium hover:underline"
-                    >
-                        Send us your resume
-                    </a>
-                </div>
-
-            </div>
-        </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default Career;

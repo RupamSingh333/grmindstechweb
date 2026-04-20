@@ -106,6 +106,25 @@
     @apply bg-card/50 backdrop-blur-xl border border-border/50;
   }
 
+  /* 🔥 Add this inside @layer utilities */
+  @keyframes gradient-x {
+
+    0%,
+    100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 5s ease infinite;
+  }
+
   .glass-bg {
     background: hsl(var(--glass-bg));
   }
@@ -132,9 +151,12 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-20px);
     }
@@ -151,6 +173,7 @@
         0 0 10px hsl(var(--primary) / 0.2),
         0 0 20px hsl(var(--primary) / 0.2);
     }
+
     to {
       box-shadow:
         0 0 20px hsl(var(--primary) / 0.4),

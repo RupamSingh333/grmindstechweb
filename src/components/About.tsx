@@ -1,153 +1,131 @@
-import { motion } from 'framer-motion';
-import { Target, Users, Lightbulb, TrendingUp, Award, Globe, Heart, Rocket } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Target, Users, Lightbulb, TrendingUp, Award, Globe, Heart, Rocket, ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
-import ParallaxSection from './ParallaxSection';
 
 const values = [
-  {
-    icon: Target,
-    title: 'Mission-Driven',
-    description: 'Committed to delivering excellence in every project with clear objectives.',
-  },
-  {
-    icon: Users,
-    title: 'Client-Focused',
-    description: 'Your success is our top priority; we build solutions that meet your needs.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Innovation First',
-    description: 'Leveraging cutting-edge technologies to create next-gen digital solutions.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Growth Oriented',
-    description: 'Scaling solutions for future growth and sustainable business impact.',
-  },
-  {
-    icon: Rocket,
-    title: 'Agile Approach',
-    description: 'Delivering projects quickly with iterative improvements for maximum efficiency.',
-  },
-  {
-    icon: Heart,
-    title: 'Passion & Dedication',
-    description: 'Driven by passion for technology and commitment to client satisfaction.',
-  },
-  {
-    icon: Award,
-    title: 'Quality Assured',
-    description: 'Every project follows strict quality standards to ensure excellence.',
-  },
-  {
-    icon: Globe,
-    title: 'Global Perspective',
-    description: 'We combine local expertise with global trends for innovative solutions.',
-  },
+  { icon: Target, title: 'Mission-Driven', description: 'Excellence in every pixel and line of code.', color: 'text-cyan-500' },
+  { icon: Users, title: 'Client-Focused', description: 'Your vision is the heart of our development.', color: 'text-blue-500' },
+  { icon: Lightbulb, title: 'Innovation', description: 'Next-gen tech for modern business problems.', color: 'text-purple-500' },
+  { icon: Rocket, title: 'Agile Approach', description: 'Fast iterations with maximum efficiency.', color: 'text-orange-500' },
 ];
 
 const stats = [
-  { value: '15+', label: 'Projects Delivered' },
-  { value: '15+', label: 'Happy Clients' },
-  { value: '5+', label: 'Team Members' },
-  { value: '7+', label: 'Years Experience' },
-  { value: '200K+', label: 'Lines of Code Written' },
-  { value: '10+', label: 'Industries Served' },
+  { value: '15+', label: 'Projects', suffix: '' },
+  { value: '15+', label: 'Happy Clients', suffix: '' },
+  { value: '5+', label: 'Team Experts', suffix: '' },
+  { value: '7+', label: 'Years Exp.', suffix: '' },
+  { value: '200K+', label: 'Code Lines', suffix: '' },
+  { value: '10+', label: 'Industries', suffix: '' },
 ];
 
 const About = () => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
   return (
-    <section className="py-24 px-4 relative bg-muted/5">
+    <section id="about" className="relative py-32 px-6 overflow-hidden bg-white dark:bg-[#030712]">
+      {/* Background Decorative Blurs */}
+      <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-20 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
           
-          {/* Left Content */}
-          <ParallaxSection offset={40}>
+          {/* --- LEFT CONTENT: STORY & STATS --- */}
+          <div className="relative z-10">
             <ScrollReveal direction="left">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                  About <span className="glow-text">G.R Minds</span>
-                </h2>
-                <p className="text-lg text-muted-foreground mb-4">
-                  At G.R Minds, we are a forward-thinking IT company transforming businesses through innovative technology. 
-                  Our team of skilled developers, designers, and consultants is passionate about building scalable and secure digital solutions.
-                </p>
-                <p className="text-lg text-muted-foreground mb-4">
-                  From startups to large enterprises, we partner with organizations across industries to deliver sustainable, high-quality software that drives measurable results.
-                </p>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Our approach combines creativity, technical expertise, and a client-first mindset to ensure every project exceeds expectations.
-                </p>
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                className="inline-block px-4 py-1.5 mb-6 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-500 text-xs font-bold uppercase tracking-[0.3em]"
+              >
+                Our Legacy
+              </motion.div>
+              
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 text-slate-900 dark:text-white leading-[0.9]">
+                WE ARE <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">G.R MINDS</span>
+              </h2>
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-8">
-                  {stats.map((stat, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ delay: idx * 0.1, type: 'spring' }}
-                      viewport={{ once: true }}
-                      className="text-center"
-                    >
-                      <div className="text-4xl font-bold text-primary mb-1">{stat.value}</div>
-                      <div className="text-muted-foreground text-sm">{stat.label}</div>
-                    </motion.div>
-                  ))}
-                </div>
+              <div className="space-y-6 text-lg text-slate-600 dark:text-slate-400 font-medium max-w-xl">
+                <p>
+                  At G.R Minds, we don’t just write code—we craft the digital backbone of tomorrow’s industry leaders. Based on a foundation of innovation and integrity.
+                </p>
+                <p className="border-l-4 border-cyan-500 pl-6 italic dark:text-slate-300">
+                  "Our approach combines raw creativity with technical precision to exceed every expectation."
+                </p>
               </div>
-            </ScrollReveal>
-          </ParallaxSection>
 
-          {/* Right Values */}
-          <ParallaxSection offset={-40}>
-            <ScrollReveal direction="right">
-              <div className="grid grid-cols-2 gap-6">
-                {values.map((value, index) => (
+              {/* Stats Grid with Glass Effect */}
+              <div ref={containerRef} className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12">
+                {stats.map((stat, idx) => (
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.15 }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.05,
-                      rotateZ: [0, -2, 2, 0],
-                      transition: { duration: 0.3 }
-                    }}
-                    className="glass-card p-6 rounded-lg text-center"
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: idx * 0.1 }}
+                    className="p-6 rounded-3xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/5 hover:border-cyan-500/30 transition-colors group"
                   >
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                      className="flex justify-center mb-3"
-                    >
-                      <value.icon className="h-8 w-8 text-primary" />
-                    </motion.div>
-                    <h3 className="text-lg font-semibold mb-2">{value.title}</h3>
-                    <p className="text-sm text-muted-foreground">{value.description}</p>
+                    <div className="text-3xl font-black text-slate-900 dark:text-white mb-1 group-hover:text-cyan-500 transition-colors">
+                      {stat.value}
+                    </div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                      {stat.label}
+                    </div>
                   </motion.div>
                 ))}
               </div>
             </ScrollReveal>
-          </ParallaxSection>
+          </div>
+
+          {/* --- RIGHT CONTENT: VALUES MOSAIC --- */}
+          <div className="relative">
+            <ScrollReveal direction="right">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {values.map((value, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ y: -10, rotate: index % 2 === 0 ? 1 : -1 }}
+                    className="p-8 rounded-[40px] bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/10 shadow-xl shadow-slate-200/50 dark:shadow-none backdrop-blur-xl relative overflow-hidden group"
+                  >
+                    {/* Decorative Blob */}
+                    <div className={`absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl group-hover:bg-cyan-500/10 transition-colors`} />
+                    
+                    <div className="relative z-10">
+                      <div className={`w-14 h-14 rounded-2xl bg-slate-50 dark:bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
+                        <value.icon className={`h-7 w-7 ${value.color}`} />
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 dark:text-white uppercase tracking-tight">{value.title}</h3>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                        {value.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
+
         </div>
 
-        {/* CTA Section */}
+        {/* --- BOTTOM "PARTNER" TRAY --- */}
         <ScrollReveal direction="up">
-          <div className="text-center mt-20">
-            <h3 className="text-3xl font-semibold mb-4 glow-text">
-              Partner with G.R Minds
-            </h3>
-            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Whether you are a startup or an established business, we provide end-to-end IT solutions to transform your ideas into impactful digital products. 
-              Let’s innovate together and take your business to the next level.
-            </p>
+          <div className="mt-24 p-10 md:p-16 rounded-[50px] bg-slate-900 dark:bg-white flex flex-col md:flex-row items-center justify-between gap-10">
+            <div className="max-w-xl text-center md:text-left">
+              <h3 className="text-3xl md:text-5xl font-black text-white dark:text-slate-900 tracking-tighter mb-4">
+                READY TO SCALE YOUR VISION?
+              </h3>
+              <p className="text-slate-400 dark:text-slate-600 font-medium">
+                Whether you're a startup or an enterprise, we bridge the gap between concept and reality.
+              </p>
+            </div>
             <motion.button
               whileHover={{ scale: 1.05 }}
-              className="bg-primary text-white px-6 py-3 rounded-lg font-medium shadow-lg hover:bg-primary/90 transition-all"
+              whileTap={{ scale: 0.95 }}
+              className="px-10 py-5 bg-cyan-500 text-white font-black uppercase text-sm rounded-full flex items-center gap-3 shadow-[0_20px_40px_rgba(6,182,212,0.3)]"
             >
-              Contact Us Today
+              Partner with Us <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
         </ScrollReveal>

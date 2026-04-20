@@ -4,7 +4,7 @@ import Services from '@/components/Services';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import ParticleBackground from '@/components/ParticleBackground';
+// import ParticleBackground from '@/components/ParticleBackground';
 import Team from '@/components/Teams';
 import Career from '@/components/Careers';
 
@@ -12,7 +12,7 @@ import Career from '@/components/Careers';
 const Index = () => {
   return (
     <div className="min-h-screen relative">
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <Navbar />
       <div id="home">
         <Hero />
