@@ -140,11 +140,11 @@ const Hero = () => {
             G.R MINDS <br />
             <span className="mt-1 inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-blue-500 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-x">
               <Typewriter
-                words={["TECHNOLOGIES", "INNOVATION", "EXCELLENCE", "FUTURE-READY"]}
+                words={["TECHNOLOGIES", "INNOVATION", "EXCELLENCE", "SOLUTION"]}
                 loop={false}
                 cursor
                 cursorStyle="|"
-                typeSpeed={100}
+                typeSpeed={200}
               />
             </span>
           </h1>

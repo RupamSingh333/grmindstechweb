@@ -11,6 +11,7 @@ import WhatsAppFloat from "./components/WhatsAppFloat";
 import Preloader from "./components/Preloader";
 import CustomCursor from "./components/CustomCursor";
 
+
 const queryClient = new QueryClient();
 
 const App = () => {

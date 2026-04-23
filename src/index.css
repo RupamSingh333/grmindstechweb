@@ -10,19 +10,15 @@
 }
 
 /* ============================= */
-/* 🎨 DESIGN SYSTEM (FIXED) */
+/* 🎨 DESIGN SYSTEM */
 /* ============================= */
 @layer base {
   :root {
-    /* 🌞 LIGHT MODE */
     --background: 0 0% 100%;
     --foreground: 222 47% 10%;
 
     --card: 0 0% 100%;
     --card-foreground: 222 47% 10%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 10%;
 
     --primary: 199 89% 48%;
     --primary-foreground: 0 0% 100%;
@@ -33,11 +29,7 @@
     --muted: 210 40% 96%;
     --muted-foreground: 215 20% 40%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 0 0% 100%;
-
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
 
     --border: 220 13% 90%;
     --input: 220 13% 90%;
@@ -45,46 +37,32 @@
 
     --radius: 0.75rem;
 
-    /* Custom UI Tokens */
+    /* Only keep what is actually used */
     --neon-cyan: 189 97% 55%;
-    --neon-blue: 217 91% 60%;
-    --glass-bg: hsl(0 0% 100% / 0.5);
-    --glow-primary: hsl(199 89% 48% / 0.3);
+    --glass-bg: 0 0% 100%;
   }
 
   .dark {
-    /* 🌙 DARK MODE */
     --background: 222 47% 5%;
     --foreground: 210 40% 98%;
 
     --card: 222 47% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-
     --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 5%;
-
     --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
 
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 5%;
-
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 199 89% 48%;
 
-    --glass-bg: hsl(222 47% 8% / 0.5);
+    --glass-bg: 222 47% 8%;
   }
 
   * {
     @apply border-border;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   body {
@@ -92,41 +70,18 @@
     font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
   }
-
-  /* html {
-    scroll-behavior: smooth;
-  } */
 }
 
 /* ============================= */
-/* ✨ CUSTOM UTILITIES */
+/* ✨ UTILITIES */
 /* ============================= */
 @layer utilities {
   .glass-card {
     @apply bg-card/50 backdrop-blur-xl border border-border/50;
   }
 
-  /* 🔥 Add this inside @layer utilities */
-  @keyframes gradient-x {
-
-    0%,
-    100% {
-      background-size: 200% 200%;
-      background-position: left center;
-    }
-
-    50% {
-      background-size: 200% 200%;
-      background-position: right center;
-    }
-  }
-
-  .animate-gradient-x {
-    animation: gradient-x 5s ease infinite;
-  }
-
   .glass-bg {
-    background: hsl(var(--glass-bg));
+    background: hsl(var(--glass-bg) / 0.5);
   }
 
   .glow-text {
@@ -145,40 +100,34 @@
     filter: drop-shadow(0 0 10px hsl(var(--primary) / 0.5));
   }
 
-  /* Floating animation */
+  /* ===== Animations (keep only if used) ===== */
+
+  .animate-gradient-x {
+    animation: gradient-x 5s ease infinite;
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-position: left center;
+      background-size: 200% 200%;
+    }
+    50% {
+      background-position: right center;
+      background-size: 200% 200%;
+    }
+  }
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
   @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-
-    50% {
-      transform: translateY(-20px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 
-  /* Glow animation */
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0%);
-    }
-
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee {
-    animation: marquee 18s linear infinite;
   }
 
   @keyframes glow {
@@ -187,11 +136,19 @@
         0 0 10px hsl(var(--primary) / 0.2),
         0 0 20px hsl(var(--primary) / 0.2);
     }
-
     to {
       box-shadow:
         0 0 20px hsl(var(--primary) / 0.4),
         0 0 40px hsl(var(--primary) / 0.4);
     }
+  }
+
+  .animate-marquee {
+    animation: marquee 18s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 }

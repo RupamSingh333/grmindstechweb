@@ -22,7 +22,7 @@ const Navbar = () => {
     { name: 'about', id: 'about' },
     { name: 'teams', id: 'teams' },
     { name: 'contact', id: 'contact' },
-    { name: 'careers', id: 'careers' },
+    // { name: 'careers', id: 'careers' },
     // { name: 'privacy', id: 'privacy' },
   ];
 

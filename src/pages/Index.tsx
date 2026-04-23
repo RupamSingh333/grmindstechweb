@@ -6,7 +6,10 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 // import ParticleBackground from '@/components/ParticleBackground';
 import Team from '@/components/Teams';
-import Career from '@/components/Careers';
+import TechStack from '@/components/TechnologiesWeUse';
+import ElectricSDLC from '@/components/SDLCFlow';
+
+// import Career from '@/components/Careers';
 
 
 const Index = () => {
@@ -20,6 +23,12 @@ const Index = () => {
       <div id="services">
         <Services />
       </div>
+      <div id="technologies">
+        <TechStack />
+      </div>
+      <div id="sdlc">
+        <ElectricSDLC />
+      </div>
       <div id="about">
         <About />
       </div>
@@ -29,9 +38,9 @@ const Index = () => {
       <div id="contact">
         <Contact />
       </div>
-      <div className="careers">
+      {/* <div className="careers">
         <Career />
-      </div>
+      </div> */}
       <Footer />
     </div>
   );
