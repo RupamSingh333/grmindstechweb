@@ -25,7 +25,7 @@ const teamMembers = [
         image: profile2,
         accent: 'from-purple-500 to-indigo-600',
         description:
-            'A versatile developer focused on high-performance applications and modern UI/UX. Rupam bridges the gap between complex logic and seamless user experience.',
+            'A versatile developer focused on high-performance applications and modern UI/UX. Sanjay bridges the gap between complex logic and seamless user experience.',
         linkedin: "#",//https://www.linkedin.com/in/rupam-kumar-1061321b2
         mail: "#", //rupamkumar333@gmail.com
         // portfolio: "https://rupamsingh333.github.io/rupam-kumar-portfolio-pulse"
