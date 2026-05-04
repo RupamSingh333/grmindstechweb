@@ -16,19 +16,19 @@ const teamMembers = [
             'A visionary leader specializing in scalable systems and backend architecture. Gaurav drives the technical strategy, ensuring every solution is built for future-ready performance.',
         linkedin: "https://www.linkedin.com/in/gaurav-upadhyay312",
         mail: "gauravupadhyaycool8@gmail.com",
-        portfolio: "#"
+        // portfolio: "#"
     },
     {
-        name: 'Rupam Singh',
+        name: 'Sanjay Beniwal',
         role: 'Co-Founder & Full Stack Developer',
         experience: '5+ Years in Web & Mobile Systems',
-        image: profile1,
+        image: profile2,
         accent: 'from-purple-500 to-indigo-600',
         description:
             'A versatile developer focused on high-performance applications and modern UI/UX. Rupam bridges the gap between complex logic and seamless user experience.',
-        linkedin: "https://www.linkedin.com/in/rupam-kumar-1061321b2",
-        mail: "rupamkumar333@gmail.com",
-        portfolio: "https://rupamsingh333.github.io/rupam-kumar-portfolio-pulse"
+        linkedin: "#",//https://www.linkedin.com/in/rupam-kumar-1061321b2
+        mail: "#", //rupamkumar333@gmail.com
+        // portfolio: "https://rupamsingh333.github.io/rupam-kumar-portfolio-pulse"
     },
 ];
 
@@ -113,9 +113,9 @@ const Team = () => {
                                                 <motion.a href={`mailto:${member.mail}`} whileHover={{ scale: 1.1 }} className="p-2.5 md:p-3 rounded-full bg-slate-100 dark:bg-white/5">
                                                     <Mail size={18} />
                                                 </motion.a>
-                                                <motion.a href={member.portfolio} target="_blank" whileHover={{ scale: 1.1 }} className="p-2.5 md:p-3 rounded-full bg-slate-100 dark:bg-white/5">
+                                                {/* <motion.a href={member.portfolio} target="_blank" whileHover={{ scale: 1.1 }} className="p-2.5 md:p-3 rounded-full bg-slate-100 dark:bg-white/5">
                                                     <ExternalLink size={18} />
-                                                </motion.a>
+                                                </motion.a> */}
                                             </div>
 
                                         </CardContent>
