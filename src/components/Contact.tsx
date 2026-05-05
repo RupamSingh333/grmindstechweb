@@ -22,7 +22,12 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Our Offices',
-    value: 'UP & Bihar, India',
+    value: 'BM Raj Tower, Varanasi, Uttar Pradesh - 221007, India',
+  },
+  {
+    icon: MapPin,
+    title: 'Our Offices',
+    value: 'Singh House Kothwa Khagaul, Patna, Bihar - 801105, India',
   },
 ];
 
@@ -96,7 +101,7 @@ const Contact = () => {
               </div>
 
               {/* Office Locations Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 md:mt-8">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 md:mt-8">
                 <div className="p-5 md:p-6 rounded-[24px] md:rounded-[32px] bg-slate-900 dark:bg-white text-white dark:text-slate-900">
                   <p className="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">Uttar Pradesh</p>
                   <p className="text-[11px] md:text-xs font-medium leading-relaxed">BM Raj Tower, Varanasi, UP - 221007</p>
@@ -105,7 +110,7 @@ const Contact = () => {
                   <p className="text-[10px] font-black uppercase tracking-widest opacity-80 mb-2">Bihar Office</p>
                   <p className="text-[11px] md:text-xs font-medium leading-relaxed">Kothwa Khagaul, Patna, BR - 801105</p>
                 </div>
-              </div>
+              </div> */}
             </ScrollReveal>
           </div>
 

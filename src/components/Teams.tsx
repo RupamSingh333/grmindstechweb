@@ -22,7 +22,7 @@ const teamMembers = [
         name: 'Sanjay Beniwal',
         role: 'Co-Founder & Full Stack Developer',
         experience: '5+ Years in Web & Mobile Systems',
-        image: profile2,
+        image: 'https://www.daac.in/images/facultyimg/444747977.jpg',
         accent: 'from-purple-500 to-indigo-600',
         description:
             'A versatile developer focused on high-performance applications and modern UI/UX. Sanjay bridges the gap between complex logic and seamless user experience.',
