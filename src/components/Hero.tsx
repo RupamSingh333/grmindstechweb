@@ -7,8 +7,10 @@ import {
   useMotionValue,
   useInView,
 } from "framer-motion";
-import { ArrowRight, Code, Sparkles, Zap, Shield, Rocket, Globe, Smartphone } from "lucide-react";
-import { Typewriter } from "react-simple-typewriter"; // ✅ added
+import { ArrowRight, Code, Sparkles, Zap, Shield, Rocket, Globe, Smartphone, Star, Cpu, Brain, Network } from "lucide-react";
+import { Typewriter } from "react-simple-typewriter";
+import AntigravityWrapper from "./AntigravityWrapper";
+import AIFloatingNodes from "./AIFloatingNodes";
 
 const Hero = () => {
   const containerRef = useRef(null);
@@ -20,11 +22,11 @@ const Hero = () => {
   const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
-    mouseX.set((clientX - innerWidth / 2) / 25);
-    mouseY.set((clientY - innerHeight / 2) / 25);
+    mouseX.set((clientX - innerWidth / 2) / 35);
+    mouseY.set((clientY - innerHeight / 2) / 35);
   };
 
   // --- SCROLL ANIMATIONS ---
@@ -33,7 +35,7 @@ const Hero = () => {
     offset: ["start start", "end start"],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacityFade = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   // Animation Variants
@@ -50,22 +52,6 @@ const Hero = () => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "circOut" } },
   };
 
-  const handleNavClick = (linkId: string) => {
-    const element = document.getElementById(linkId);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <section
       ref={containerRef}
@@ -74,31 +60,44 @@ const Hero = () => {
                  bg-[#fafafa] dark:bg-[#030712] transition-colors duration-700 
                  pt-28 pb-16 md:pt-45 md:pb-32"
     >
-      {/* --- BACKGROUND ANIMATIONS --- */}
+      {/* --- BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        <AIFloatingNodes />
+        
+        {/* Animated Background Orbs - Theme Aware */}
         <motion.div
           animate={{
-            y: [0, -20, 0],
-            rotate: [0, 10, 0],
-            scale: [1, 1.1, 1],
+            y: [0, -40, 0],
+            rotate: [0, 20, 0],
+            scale: [1, 1.3, 1],
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] left-[10%] w-32 h-32 md:w-64 md:h-64 bg-cyan-500/10 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-3xl"
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[5%] left-[-5%] w-72 h-72 md:w-[600px] md:h-[600px] bg-cyan-500/20 dark:bg-cyan-500/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-normal"
         />
         <motion.div
           animate={{
-            y: [0, 20, 0],
-            x: [0, 15, 0],
-            rotate: [0, -10, 0],
+            y: [0, 50, 0],
+            x: [0, 30, 0],
+            rotate: [0, -20, 0],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-[20%] right-[5%] w-40 h-40 md:w-80 md:h-80 bg-indigo-500/10 rounded-full blur-3xl"
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="absolute bottom-[10%] right-[-5%] w-80 h-80 md:w-[700px] md:h-[700px] bg-indigo-500/20 dark:bg-indigo-500/10 rounded-full blur-[140px] mix-blend-multiply dark:mix-blend-normal"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 md:w-[800px] md:h-[800px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[160px]"
         />
 
-        <div className="absolute inset-0 opacity-[0.06] pointer-events-none 
-        [background-image:radial-gradient(#ffffff10_1px,transparent_1px)] 
-        [background-size:3px_3px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]" />
+        {/* Patterns */}
+        <div className="absolute inset-0 opacity-[0.08] dark:opacity-[0.05] pointer-events-none 
+        [background-image:radial-gradient(#000_1px,transparent_1px)] dark:[background-image:radial-gradient(#fff_1px,transparent_1px)] 
+        [background-size:24px_24px] md:[background-size:48px_48px]" />
+        
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:80px_80px]" />
       </div>
 
       {/* --- MOUSE FOLLOWER ORB --- */}
@@ -106,7 +105,7 @@ const Hero = () => {
         style={{ x: springX, y: springY }}
         className="hidden md:block absolute top-0 left-0 w-full h-full pointer-events-none z-0"
       >
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-cyan-400/5 rounded-full blur-[150px]" />
       </motion.div>
 
       {/* --- MAIN CONTENT --- */}
@@ -118,84 +117,74 @@ const Hero = () => {
         className="relative z-10 container mx-auto px-6 text-center"
       >
         {/* Badge */}
-        {/* Animated Badge */}
         <motion.div variants={itemVariants} className="flex justify-center mb-6 md:mb-10">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-xl shadow-cyan-500/5"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300">
-              Transforming the Digital Landscape
-            </span>
-          </motion.div>
+          <AntigravityWrapper floatRange={[-5, 5]} floatDuration={3} parallaxStrength={20}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-xl shadow-xl shadow-cyan-500/5"
+            >
+              <Cpu className="w-3 h-3 text-cyan-500" />
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+                Next-Gen AI Solutions
+              </span>
+            </motion.div>
+          </AntigravityWrapper>
         </motion.div>
 
         {/* Heading */}
         <motion.div variants={itemVariants} className="mb-6 md:mb-10">
           <h1 className="text-5xl sm:text-7xl md:text-[120px] font-black tracking-tighter leading-[0.8] text-slate-900 dark:text-white">
-            G.R MINDS <br />
-            <span className="mt-1 inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-blue-500 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-500 animate-gradient-x">
+            GR MINDS <br />
+            <span className="mt-4 inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 dark:from-cyan-300 dark:via-blue-400 dark:to-purple-500 animate-gradient-x">
               <Typewriter
-                words={["TECHNOLOGIES", "INNOVATION", "EXCELLENCE", "SOLUTION"]}
+                words={["INTELLIGENCE", "AUTOMATION", "INNOVATION", "SOFTWARE"]}
                 loop={false}
                 cursor
-                cursorStyle="|"
-                typeSpeed={200}
+                cursorStyle="_"
+                typeSpeed={150}
               />
             </span>
           </h1>
         </motion.div>
 
-        {/* Marquee Subtitle */}
+        {/* Subtitle */}
         <motion.div
           variants={itemVariants}
-          className="relative overflow-hidden w-full mb-10 md:mb-14 group"
+          className="max-w-3xl mx-auto mb-10 md:mb-16"
         >
-          <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-[#fafafa] dark:from-[#030712] to-transparent z-10" />
-          <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-[#fafafa] dark:from-[#030712] to-transparent z-10" />
-
-          <div className="flex whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused] gap-10">
-            {[...Array(2)].map((_, i) => (
-              <span
-                key={i}
-                className="text-base md:text-2xl text-slate-600 dark:text-slate-400 px-4"
-              >
-                Engineering{" "}
-                <span className="text-cyan-500 font-semibold italic">scalable</span>{" "}
-                solutions for a connected world. We turn bold ideas into high-performance reality.
-              </span>
-            ))}
-          </div>
+          <p className="text-lg md:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+            Empowering businesses with <span className="text-cyan-500 font-bold">Elite AI Engineering</span> and <span className="text-indigo-500 font-bold">Scalable Software</span> architectures.
+          </p>
         </motion.div>
 
-        {/* Cards (UNCHANGED) */}
+        {/* Cards */}
         <motion.div
           variants={itemVariants}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto px-2"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto px-2"
         >
           {[
-            { icon: <Zap />, title: "Velocity", desc: "Fast Delivery", color: "bg-yellow-500/10 text-yellow-600" },
-            { icon: <Smartphone />, title: "Mobile", desc: "Native Feel", color: "bg-cyan-500/10 text-cyan-600" },
-            { icon: <Shield />, title: "Trust", desc: "Secure Core", color: "bg-emerald-500/10 text-emerald-600" },
-            { icon: <Globe />, title: "Scale", desc: "Global Infra", color: "bg-purple-500/10 text-purple-600" },
+            { icon: <Brain />, title: "AI Core", desc: "Smart Systems", color: "text-cyan-500" },
+            { icon: <Network />, title: "Neural", desc: "Global Edge", color: "text-indigo-500" },
+            { icon: <Zap />, title: "Fast", desc: "Rapid Dev", color: "text-amber-500" },
+            { icon: <Shield />, title: "Secure", desc: "Ironclad Code", color: "text-emerald-500" },
           ].map((card, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -5 }}
-              className="p-4 md:p-6 rounded-2xl bg-white/40 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 backdrop-blur-md text-left flex flex-col gap-2 md:gap-4"
-            >
-              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center ${card.color}`}>
-                {card.icon}
-              </div>
-              <div>
-                <h3 className="font-bold text-sm md:text-base">{card.title}</h3>
-                <p className="text-xs">{card.desc}</p>
-              </div>
-            </motion.div>
+            <AntigravityWrapper key={i} floatRange={[-10, 10]} floatDuration={4 + i} parallaxStrength={30 + i * 10}>
+              <motion.div
+                whileHover={{ y: -5, scale: 1.05 }}
+                className="group p-6 md:p-8 h-full rounded-[2rem] bg-white/40 dark:bg-slate-950/40 border border-slate-200 dark:border-white/5 backdrop-blur-xl text-left flex flex-col gap-4 transition-all hover:border-cyan-500/50 shadow-2xl shadow-transparent hover:shadow-cyan-500/10"
+              >
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/5 transition-colors group-hover:bg-cyan-500/10 ${card.color}`}>
+                  {React.cloneElement(card.icon as React.ReactElement, { className: "w-6 h-6 md:w-8 md:h-8" })}
+                </div>
+                <div>
+                  <h3 className="font-black text-lg md:text-xl uppercase tracking-tighter">{card.title}</h3>
+                  <p className="text-xs md:text-sm opacity-60 font-medium">{card.desc}</p>
+                </div>
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                   <ArrowRight className="w-4 h-4 text-cyan-500" />
+                </div>
+              </motion.div>
+            </AntigravityWrapper>
           ))}
         </motion.div>
       </motion.div>
@@ -203,4 +192,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Hero;
