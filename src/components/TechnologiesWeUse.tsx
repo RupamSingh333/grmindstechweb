@@ -62,15 +62,21 @@ const TechStack = () => {
                     className="flex whitespace-nowrap gap-6 py-4"
                 >
                     {techStack.map((tech, index) => (
-                        <div
+                        <motion.div
                             key={index}
-                            className="bg-white/40 dark:bg-white/5  flex items-center gap-4 px-10 py-6 rounded-[2rem] bg-slate-50  border border-slate-100 dark:border-white/5 backdrop-blur-sm group hover:border-cyan-500/40 transition-all duration-500"
+                            whileHover={{ y: -5, scale: 1.02 }}
+                            className="relative group cursor-pointer"
                         >
-                            <tech.icon className={`text-4xl ${tech.color} group-hover:scale-110 transition-transform duration-500`} />
-                            <span className="text-xl font-black text-slate-800 dark:text-slate-200 tracking-tighter uppercase">
-                                {tech.name}
-                            </span>
-                        </div>
+                            {/* Dynamic Color Glow */}
+                            <div className={`absolute -inset-1 bg-current opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-[2rem] ${tech.color.replace('text-', 'bg-')}`} />
+                            
+                            <div className="relative bg-white/60 dark:bg-white/5 flex items-center gap-4 px-10 py-6 rounded-[2rem] border border-slate-200 dark:border-white/10 backdrop-blur-md group-hover:border-cyan-500/50 transition-all duration-500">
+                                <tech.icon className={`text-4xl ${tech.color} group-hover:scale-125 transition-transform duration-500 filter drop-shadow-sm group-hover:drop-shadow-[0_0_8px_currentColor]`} />
+                                <span className="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tighter uppercase italic">
+                                    {tech.name}
+                                </span>
+                            </div>
+                        </motion.div>
                     ))}
                 </motion.div>
             </div>

@@ -62,7 +62,7 @@ const CustomCursor = () => {
   return (
     <>
 
-      {/* 🔵 OUTER RING */}
+      {/* 🔵 OUTER RING (PORTAL) */}
       <motion.div
         className="fixed top-0 left-0 z-[9999] pointer-events-none flex items-center justify-center"
         style={{
@@ -74,19 +74,29 @@ const CustomCursor = () => {
       >
         <motion.div
           animate={{
-            width: isHover ? 48 : 24,
-            height: isHover ? 48 : 24,
+            width: isHover ? 80 : 32,
+            height: isHover ? 80 : 32,
             borderWidth: isHover ? "1px" : "1.5px",
-            borderColor: isHover ? "#22d3ee" : "#06b6d4",
-            opacity: isHover ? 1 : 0.4,
-            scale: isHover ? 1.2 : 1,
+            borderColor: isHover ? "rgba(34, 211, 238, 0.8)" : "rgba(6, 182, 212, 0.4)",
+            backgroundColor: isHover ? "rgba(34, 211, 238, 0.05)" : "transparent",
+            scale: isHover ? 1.1 : 1,
           }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="rounded-full border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-        />
+          transition={{ type: "spring", stiffness: 250, damping: 25 }}
+          className="rounded-full flex items-center justify-center backdrop-blur-[2px]"
+        >
+          {/* Subtle Inner Pulse during Hover */}
+          {isHover && (
+            <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: [1, 1.5], opacity: [0.3, 0] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="absolute inset-0 rounded-full border border-cyan-400"
+            />
+          )}
+        </motion.div>
       </motion.div>
 
-      {/* 🔵 INNER DOT */}
+      {/* 🔵 INNER CORE */}
       <motion.div
         className="fixed top-0 left-0 z-[10000] pointer-events-none"
         style={{
@@ -98,11 +108,14 @@ const CustomCursor = () => {
       >
         <motion.div
           animate={{
-            scale: isHover ? 0 : 1,
-            opacity: isHover ? 0 : 1,
+            scale: isHover ? 0.5 : 1,
+            backgroundColor: isHover ? "#fff" : "#06b6d4",
+            boxShadow: isHover 
+              ? "0 0 20px #fff" 
+              : "0 0 10px #06b6d4",
           }}
-          transition={{ duration: 0.2 }}
-          className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_#06b6d4]"
+          transition={{ duration: 0.3 }}
+          className="w-2 h-2 rounded-full"
         />
       </motion.div>
     </>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Sparkles, Briefcase, ShieldCheck, Cpu } from 'lucide-react';
+import { Menu, X, ArrowRight, Sparkles, Briefcase, ShieldCheck } from 'lucide-react';
 import logo from '@/assets/logo-big-transparent.png';
 import ThemeToggle from './ThemeToggle';
 import PrivacyModal from './PrivacyModal';
@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 15);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -22,6 +22,8 @@ const Navbar = () => {
     { name: 'about', id: 'about' },
     { name: 'teams', id: 'teams' },
     { name: 'contact', id: 'contact' },
+    // { name: 'careers', id: 'careers' },
+    // { name: 'privacy', id: 'privacy' },
   ];
 
   const handleNavClick = (linkId: string) => {
@@ -30,7 +32,8 @@ const Navbar = () => {
     } else {
       const element = document.getElementById(linkId);
       if (element) {
-        const offset = 100;
+        // Offset for the sticky header height
+        const offset = 80;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
@@ -47,131 +50,212 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[60] flex justify-center pointer-events-none p-4 md:p-6">
+      <div className="fixed top-0 left-0 right-0 z-[60] flex justify-center pointer-events-none">
         <motion.nav
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
           className={`
-            pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
-            flex items-center justify-between px-8 py-4
+            mt-4 pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
+            flex items-center justify-between px-6 py-3
             ${isScrolled 
-              ? 'w-full md:w-[90%] lg:w-[80%] rounded-[2rem] bg-white/70 dark:bg-black/70 backdrop-blur-3xl border border-white/20 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]' 
-              : 'w-full bg-transparent border-transparent'}
+              ? 'w-[95%] md:w-[85%] lg:w-[75%] rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-2xl saturate-150' 
+              : 'w-full md:w-[98%] rounded-none bg-transparent border-transparent'}
           `}
         >
-          {/* LOGO */}
+          {/* --- LOGO: INCREASED SIZE & GLOW --- */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="flex items-center gap-3 cursor-pointer group" 
             onClick={() => handleNavClick('home')}
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-cyan-500 blur-2xl opacity-20 group-hover:opacity-60 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-cyan-400 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
               <img 
                 src={logo} 
                 alt="Logo" 
-                className="h-10 md:h-14 w-auto relative z-10 brightness-110 group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all duration-500" 
+                className="h-12 md:h-16 w-auto relative z-10 logo-glow brightness-110" 
               />
             </div>
           </motion.div>
 
-          {/* DESKTOP MENU */}
-          <div className="hidden lg:flex items-center gap-8">
-            <div className="flex items-center gap-2">
+          {/* --- DESKTOP MENU --- */}
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="flex items-center gap-1 bg-slate-500/10 dark:bg-white/5 p-1.5 rounded-full backdrop-blur-md">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleNavClick(link.id)}
-                  className="px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors relative group"
+                  className="px-4 py-2 text-[11px] font-black uppercase tracking-widest text-slate-700 dark:text-slate-200 hover:text-cyan-500 dark:hover:text-cyan-400 rounded-full transition-all hover:bg-white/80 dark:hover:bg-white/10"
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-cyan-500 transition-all group-hover:w-1/2" />
                 </button>
               ))}
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="h-6 w-[1px] bg-slate-200 dark:bg-white/10" />
+            <div className="flex items-center gap-3 ml-2">
               <ThemeToggle />
               <motion.button 
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(6,182,212,0.3)" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavClick('contact')}
-                className="px-8 py-3.5 bg-slate-950 dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest rounded-2xl flex items-center gap-2 transition-all"
+                className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-black text-[11px] font-black uppercase tracking-tighter rounded-full shadow-xl shadow-cyan-500/10"
               >
-                <Cpu size={14} className="animate-pulse" />
-                Init Sequence
+                Let's Innovate
               </motion.button>
             </div>
           </div>
 
-          {/* MOBILE TRIGGER */}
-          <div className="lg:hidden flex items-center gap-4">
+          {/* --- MOBILE TRIGGER --- */}
+          <div className="lg:hidden flex items-center gap-3">
              <ThemeToggle />
              <motion.button 
                whileTap={{ scale: 0.9 }}
                onClick={() => setIsMobileMenuOpen(true)}
-               className="p-4 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-black shadow-xl"
+               className="p-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black"
              >
-               <Menu size={20} />
+               <Menu size={22} />
              </motion.button>
           </div>
         </motion.nav>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* --- MODERN MOBILE MENU OVERHAUL --- */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] lg:hidden overflow-hidden"
+          >
+            {/* Backdrop with heavy blur */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/90 backdrop-blur-2xl z-[70]"
+              className="absolute inset-0 bg-white/80 dark:bg-black/90 backdrop-blur-2xl"
             />
 
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] bg-white dark:bg-[#030712] z-[80] p-10 flex flex-col border-l border-white/10"
-            >
-              <button 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="self-end p-4 bg-slate-100 dark:bg-white/5 rounded-2xl mb-12"
-              >
-                <X size={24} />
-              </button>
+            {/* Decorative Background Elements */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 90, 0],
+                  x: [0, 50, 0],
+                  y: [0, 30, 0]
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-cyan-500/10 blur-[120px]"
+              />
+              <motion.div 
+                animate={{ 
+                  scale: [1.2, 1, 1.2],
+                  rotate: [0, -90, 0],
+                  x: [0, -50, 0],
+                  y: [0, -30, 0]
+                }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 blur-[120px]"
+              />
+            </div>
 
-              <div className="flex flex-col gap-6">
+            {/* Content Container */}
+            <div className="relative h-full flex flex-col p-8 pt-24">
+              {/* Close Button */}
+              <motion.button 
+                initial={{ scale: 0, rotate: -90 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="absolute top-6 right-8 p-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full shadow-2xl z-50"
+              >
+                <X size={24} strokeWidth={3} />
+              </motion.button>
+
+              {/* Navigation Links */}
+              <div className="flex flex-col gap-4 mt-8">
                 {navLinks.map((link, i) => (
                   <motion.button
                     key={link.name}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
+                    initial={{ opacity: 0, x: -50, rotateX: -45 }}
+                    animate={{ opacity: 1, x: 0, rotateX: 0 }}
+                    exit={{ opacity: 0, x: -20, transition: { delay: i * 0.03 } }}
+                    transition={{ 
+                      type: "spring", 
+                      damping: 20, 
+                      stiffness: 100, 
+                      delay: 0.1 + (i * 0.1) 
+                    }}
                     onClick={() => handleNavClick(link.id)}
-                    className="text-4xl font-black uppercase tracking-tighter text-left flex items-center justify-between group"
+                    className="group flex items-center gap-6 py-2 text-left"
                   >
-                    <span className="group-hover:text-cyan-500 transition-colors italic">{link.name}</span>
-                    <ArrowRight className="opacity-0 group-hover:opacity-100 transition-all text-cyan-500" size={32} />
+                    <span className="text-xs font-black text-cyan-500/50 dark:text-cyan-400/40 uppercase tracking-[0.3em] font-mono">
+                      0{i + 1}
+                    </span>
+                    <div className="relative overflow-hidden">
+                      <span className="text-5xl md:text-6xl font-black uppercase tracking-tighter text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors duration-300 italic block">
+                        {link.name}
+                      </span>
+                      <motion.div 
+                        className="absolute bottom-0 left-0 h-1 bg-cyan-500 dark:bg-cyan-400"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: "100%" }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </div>
+                    <ArrowRight className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-cyan-500 dark:text-cyan-400" size={32} />
                   </motion.button>
                 ))}
               </div>
 
-              <div className="mt-auto flex flex-col gap-4">
-                <div className="p-6 rounded-[2rem] bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
-                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-500 mb-2">System Status</p>
-                   <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-xs font-bold">All Modules Active</span>
-                   </div>
+              {/* Secondary Actions / Info */}
+              <div className="mt-auto pt-10 border-t border-slate-200 dark:border-white/10">
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: Briefcase, label: "Careers", value: "Join the Tribe", color: "bg-cyan-500/5 dark:bg-cyan-400/10" },
+                    { icon: ShieldCheck, label: "Security", value: "Privacy Policy", color: "bg-purple-500/5 dark:bg-purple-400/10" }
+                  ].map((item, i) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ delay: 0.5 + (i * 0.1) }}
+                      className={`${item.color} p-5 rounded-[2rem] border border-slate-100 dark:border-white/5 backdrop-blur-md group cursor-pointer`}
+                    >
+                      <item.icon className="text-slate-900 dark:text-white mb-3 group-hover:scale-110 transition-transform" size={20} />
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-1">
+                        {item.label}
+                      </p>
+                      <p className="text-xs font-bold text-slate-900 dark:text-white">
+                        {item.value}
+                      </p>
+                    </motion.div>
+                  ))}
                 </div>
+
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="mt-8 flex items-center justify-between"
+                >
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    © 2024 GRMinds Tech
+                  </p>
+                  <div className="flex gap-4">
+                    {/* Placeholder social icons or similar */}
+                    <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
-          </>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -180,4 +264,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;

@@ -9,7 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import Preloader from "./components/Preloader";
-import CustomCursor from "./components/CustomCursor";
+import AntigravityBackground from "./components/AntigravityBackground";
 
 
 const queryClient = new QueryClient();
@@ -48,9 +48,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
 
-        {/* PRELOADER */}
+        {/* BACKGROUND & UTILITIES */}
+        <AntigravityBackground />
         <Preloader />
-        <CustomCursor /> {/* 👈 ADD HERE */}
 
         <Toaster />
         <Sonner />
