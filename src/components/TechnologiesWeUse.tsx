@@ -37,7 +37,7 @@ const techStack = [
 const TechStack = () => {
 
     return (
-        <section className="py-24 bg-white dark:bg-[#030712] overflow-hidden relative bg-slate-50 inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]">
+        <section className="py-24 bg-transparent overflow-hidden relative inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]">
             <div className="container mx-auto px-4 mb-16 text-center">
                 <motion.span
                     initial={{ opacity: 0, y: 10 }}

@@ -19,7 +19,7 @@ const steps = [
 
 const ElectricSDLC = () => {
   return (
-    <section className="inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] overflow-hidden bg-slate-50 dark:bg-[#030712] py-10 bg-white relative overflow-hidden">
+    <section className="inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] bg-transparent py-10 relative overflow-hidden">
       <div className="container mx-auto px-4">
         
         {/* HEADER */}

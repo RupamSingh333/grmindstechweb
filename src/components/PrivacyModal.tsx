@@ -126,7 +126,7 @@ const PrivacyModal = ({ isOpen, onClose }: any) => {
                 </div>
                 <a 
                   href="mailto:info@grminds.tech" 
-                  className="px-6 py-3 bg-white text-cyan-600 rounded-2xl font-bold flex items-center gap-2 hover:scale-105 transition-transform"
+                  className="px-6 py-3 bg-white text-cyan-600 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform"
                 >
                   <Mail size={18} /> info@grminds.tech
                 </a>

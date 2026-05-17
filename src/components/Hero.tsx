@@ -71,7 +71,7 @@ const Hero = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden 
-                 bg-[#fafafa] dark:bg-[#030712] transition-colors duration-700 
+                 bg-transparent transition-colors duration-700 
                  pt-28 pb-16 md:pt-45 md:pb-32"
     >
       {/* --- BACKGROUND ANIMATIONS --- */}
@@ -186,9 +186,9 @@ const Hero = () => {
             <motion.div
               key={i}
               whileHover={{ y: -5 }}
-              className="p-4 md:p-6 rounded-2xl bg-white/40 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 backdrop-blur-md text-left flex flex-col gap-2 md:gap-4"
+              className="p-4 md:p-6 rounded-[2rem] bg-white/40 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 backdrop-blur-md text-left flex flex-col gap-2 md:gap-4"
             >
-              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center ${card.color}`}>
+              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center ${card.color}`}>
                 {card.icon}
               </div>
               <div>

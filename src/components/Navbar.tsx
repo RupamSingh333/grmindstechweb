@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Sparkles, Briefcase, ShieldCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
+import {
+  Menu,
+  X,
+  ArrowRight,
+  Briefcase,
+  ShieldCheck,
+} from 'lucide-react';
+
 import logo from '@/assets/logo-big-transparent.png';
 import ThemeToggle from './ThemeToggle';
 import PrivacyModal from './PrivacyModal';
@@ -10,11 +17,32 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
+  // Smooth scroll navbar effect
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 15);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 15);
+    };
+
     window.addEventListener('scroll', handleScroll);
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // FIX MOBILE FREEZE / STUCK SCROLL
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.touchAction = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.touchAction = 'auto';
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { name: 'home', id: 'home' },
@@ -22,8 +50,6 @@ const Navbar = () => {
     { name: 'about', id: 'about' },
     { name: 'teams', id: 'teams' },
     { name: 'contact', id: 'contact' },
-    // { name: 'careers', id: 'careers' },
-    // { name: 'privacy', id: 'privacy' },
   ];
 
   const handleNavClick = (linkId: string) => {
@@ -31,8 +57,8 @@ const Navbar = () => {
       setIsPrivacyOpen(true);
     } else {
       const element = document.getElementById(linkId);
+
       if (element) {
-        // Offset for the sticky header height
         const offset = 80;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
@@ -41,213 +67,206 @@ const Navbar = () => {
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       }
     }
+
     setIsMobileMenuOpen(false);
   };
 
   return (
     <>
+      {/* ================= NAVBAR ================= */}
       <motion.nav
-        initial={{ y: -100 }}
+        initial={{ y: -80 }}
         animate={{ y: 0 }}
+        transition={{ duration: 0.4 }}
         className={`
-          fixed top-4 left-0 right-0 mx-auto z-[60] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
-          flex items-center justify-between px-6 py-3
-          ${isScrolled 
-            ? 'w-[95%] md:w-[85%] lg:w-[75%] rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-2xl saturate-150' 
-            : 'w-full md:w-[98%] rounded-none bg-transparent border-transparent'}
+          fixed top-4 left-0 right-0 mx-auto z-[60]
+          transition-all duration-300
+          flex items-center justify-between
+          px-5 py-3
+          ${isScrolled
+            ? 'w-[95%] md:w-[85%] lg:w-[75%] rounded-full bg-white/95 dark:bg-black/90 border border-slate-200 dark:border-white/10 shadow-xl shadow-slate-100/50 dark:shadow-[0_20px_50px_rgba(6,182,212,0.15)]'
+            : 'w-full md:w-[98%] bg-transparent border-transparent'
+          }
         `}
       >
-          {/* --- LOGO: INCREASED SIZE & GLOW --- */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 cursor-pointer group" 
-            onClick={() => handleNavClick('home')}
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-cyan-400 blur-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-              <img 
-                src={logo} 
-                alt="Logo" 
-                className="h-12 md:h-16 w-auto relative z-10 logo-glow brightness-110" 
-              />
-            </div>
-          </motion.div>
+        {/* ================= LOGO ================= */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center gap-3 cursor-pointer group relative"
+          onClick={() => handleNavClick('home')}
+        >
+          <div className="absolute inset-0 bg-cyan-400/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="h-11 md:h-14 w-auto relative z-10 logo-glow brightness-110"
+          />
+        </motion.div>
 
-          {/* --- DESKTOP MENU --- */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-1 bg-slate-500/10 dark:bg-white/5 p-1.5 rounded-full backdrop-blur-md">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => handleNavClick(link.id)}
-                  className="px-4 py-2 text-[11px] font-black uppercase tracking-widest text-slate-700 dark:text-slate-200 hover:text-cyan-500 dark:hover:text-cyan-400 rounded-full transition-all hover:bg-white/80 dark:hover:bg-white/10"
-                >
-                  {link.name}
-                </button>
-              ))}
-            </div>
-            
-            <div className="flex items-center gap-3 ml-2">
-              <ThemeToggle />
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavClick('contact')}
-                className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-black text-[11px] font-black uppercase tracking-tighter rounded-full shadow-xl shadow-cyan-500/10"
+        {/* ================= DESKTOP MENU ================= */}
+        <div className="hidden lg:flex items-center gap-4">
+          <div className="flex items-center gap-1 bg-slate-200/50 dark:bg-white/5 p-1.5 rounded-full backdrop-blur-md border border-slate-200/40 dark:border-white/5">
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => handleNavClick(link.id)}
+                className="px-4 py-2 text-[11px] font-black uppercase tracking-widest text-slate-700 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-white dark:hover:bg-white/10 rounded-full transition-all"
               >
-                Let's Innovate
-              </motion.button>
-            </div>
+                {link.name}
+              </button>
+            ))}
           </div>
 
-          {/* --- MOBILE TRIGGER --- */}
-          <div className="lg:hidden flex items-center gap-3">
-             <ThemeToggle />
-             <button 
-               onClick={() => setIsMobileMenuOpen(true)}
-               className="p-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black active:scale-95 transition-transform cursor-pointer"
-               aria-label="Open Menu"
-             >
-               <Menu size={22} />
-             </button>
+          <div className="flex items-center gap-3 ml-2">
+            <ThemeToggle />
+
+            <button
+              onClick={() => handleNavClick('contact')}
+              className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-black text-[11px] font-black uppercase rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-cyan-500/10"
+            >
+              Let's Innovate
+            </button>
           </div>
-        </motion.nav>
+        </div>
 
-      {/* --- MODERN MOBILE MENU OVERHAUL --- */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] lg:hidden overflow-hidden"
+        {/* ================= MOBILE BUTTON ================= */}
+        <div className="lg:hidden flex items-center gap-3">
+          <ThemeToggle />
+
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="p-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black active:scale-95 transition-transform shadow-md"
+            aria-label="Open Menu"
           >
-            {/* Lightweight High-Performance Backdrop */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute inset-0 bg-white dark:bg-[#030712] shadow-2xl"
-            />
+            <Menu size={22} />
+          </button>
+        </div>
+      </motion.nav>
 
+      {/* ================= MOBILE MENU BACKDROP ================= */}
+      {isMobileMenuOpen && (
+        <div
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="fixed inset-0 z-[90] lg:hidden bg-black/50 dark:bg-black/80 backdrop-blur-sm transition-opacity duration-300"
+        />
+      )}
 
-            {/* Content Container (Layered above the backdrop) */}
-            <div className="relative z-10 h-full flex flex-col p-8 pt-24">
-              {/* Close Button */}
-              <motion.button 
-                initial={{ scale: 0, rotate: -90 }}
-                animate={{ scale: 1, rotate: 0 }}
-                exit={{ scale: 0, rotate: 90 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="absolute top-6 right-6 md:right-8 p-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full shadow-2xl z-50 cursor-pointer active:scale-95 transition-transform"
-                aria-label="Close Menu"
+      {/* ================= FLOATING CURVY MOBILE MENU ================= */}
+      <div
+        className={`
+          fixed top-4 right-4 bottom-4 z-[100] lg:hidden
+          w-[92%] sm:w-[380px]
+          bg-white dark:bg-[#030712]
+          backdrop-blur-2xl
+          border border-slate-200/50 dark:border-cyan-500/20
+          rounded-[3.2rem]
+          shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-[0_20px_50px_rgba(6,182,212,0.15)]
+          transform transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
+          will-change-transform
+          ${isMobileMenuOpen
+            ? 'translate-x-0 scale-100 opacity-100'
+            : 'translate-x-[110%] scale-95 opacity-0'
+          }
+        `}
+      >
+        {/* CLOSE BUTTON */}
+        <button
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="absolute top-6 right-6 p-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full shadow-lg z-50 active:scale-95 transition-transform"
+          aria-label="Close Menu"
+        >
+          <X size={24} strokeWidth={3} />
+        </button>
+
+        {/* CONTENT */}
+        <div className="h-full flex flex-col px-6 pt-28 pb-8 overflow-y-auto">
+          {/* NAVIGATION */}
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link, i) => (
+              <button
+                key={link.name}
+                onClick={() => handleNavClick(link.id)}
+                className="group flex items-center justify-between p-4 rounded-3xl w-full text-left transition-all duration-300 hover:bg-slate-100 dark:hover:bg-cyan-500/10 border border-transparent hover:border-slate-200/80 dark:hover:border-cyan-500/20 cursor-pointer"
               >
-                <X size={24} strokeWidth={3} />
-              </motion.button>
+                <div className="flex items-center gap-4">
+                  <span className="text-xs font-mono font-black text-cyan-500 dark:text-cyan-400 uppercase tracking-[0.25em]">
+                    0{i + 1}
+                  </span>
 
-              {/* Navigation Links */}
-              <div className="flex flex-col gap-4 mt-8">
-                {navLinks.map((link, i) => (
-                  <motion.button
-                    key={link.name}
-                    initial={{ opacity: 0, x: -50, rotateX: -45 }}
-                    animate={{ opacity: 1, x: 0, rotateX: 0 }}
-                    exit={{ opacity: 0, x: -20, transition: { delay: i * 0.03 } }}
-                    transition={{ 
-                      type: "spring", 
-                      damping: 20, 
-                      stiffness: 100, 
-                      delay: 0.1 + (i * 0.1) 
-                    }}
-                    onClick={() => handleNavClick(link.id)}
-                    className="group flex items-center gap-6 py-2 text-left w-full cursor-pointer"
-                  >
-                    <span className="text-xs font-black text-cyan-500/70 dark:text-cyan-400/80 uppercase tracking-[0.3em] font-mono">
-                      0{i + 1}
-                    </span>
-                    <div className="relative overflow-hidden">
-                      <span className="text-5xl md:text-6xl font-black uppercase tracking-tighter text-slate-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors duration-300 italic block">
-                        {link.name}
-                      </span>
-                      <motion.div 
-                        className="absolute bottom-0 left-0 h-1 bg-cyan-500 dark:bg-cyan-400"
-                        initial={{ width: 0 }}
-                        whileHover={{ width: "100%" }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </div>
-                    <ArrowRight className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-cyan-500 dark:text-cyan-400" size={32} />
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Secondary Actions / Info */}
-              <div className="mt-auto pt-10 border-t border-slate-200 dark:border-white/10">
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { 
-                      icon: Briefcase, 
-                      label: "Careers", 
-                      value: "Join the Tribe", 
-                      bg: "bg-cyan-500/[0.08] dark:bg-cyan-400/[0.08]", 
-                      border: "border-slate-200 dark:border-cyan-500/20 hover:border-cyan-500 dark:hover:border-cyan-400",
-                      iconColor: "text-cyan-600 dark:text-cyan-400"
-                    },
-                    { 
-                      icon: ShieldCheck, 
-                      label: "Security", 
-                      value: "Privacy Policy", 
-                      bg: "bg-purple-500/[0.08] dark:bg-purple-400/[0.08]", 
-                      border: "border-slate-200 dark:border-purple-500/20 hover:border-purple-500 dark:hover:border-purple-400",
-                      iconColor: "text-purple-600 dark:text-purple-400"
-                    }
-                  ].map((item, i) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{ delay: 0.5 + (i * 0.1) }}
-                      className={`${item.bg} ${item.border} p-5 rounded-[2rem] border backdrop-blur-md group cursor-pointer transition-all duration-300`}
-                    >
-                      <item.icon className={`${item.iconColor} mb-3 group-hover:scale-110 transition-transform`} size={20} />
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-1">
-                        {item.label}
-                      </p>
-                      <p className="text-xs font-bold text-slate-900 dark:text-white">
-                        {item.value}
-                      </p>
-                    </motion.div>
-                  ))}
+                  <span className="text-2xl md:text-3xl font-black uppercase tracking-tight text-slate-800 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors italic">
+                    {link.name}
+                  </span>
                 </div>
 
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="mt-8 flex items-center justify-between"
-                >
-                  <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
-                    © 2024 GRMinds Tech
-                  </p>
-                  <div className="flex gap-4">
-                    <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                    <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-                  </div>
-                </motion.div>
+                <ArrowRight
+                  className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-cyan-500 dark:text-cyan-400"
+                  size={20}
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* BOTTOM SECTION */}
+          <div className="mt-auto pt-10 border-t border-slate-200 dark:border-white/10">
+            <div className="grid grid-cols-2 gap-4">
+              {/* CARD 1 */}
+              <div className="p-5 rounded-[2.2rem] border border-slate-200 dark:border-cyan-500/20 bg-cyan-500/[0.06] dark:bg-cyan-400/[0.06] hover:scale-[1.02] transition-transform duration-300">
+                <Briefcase
+                  className="text-cyan-500 dark:text-cyan-400 mb-3"
+                  size={20}
+                />
+
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-1">
+                  Careers
+                </p>
+
+                <p className="text-xs font-bold text-slate-900 dark:text-white">
+                  Join the Tribe
+                </p>
+              </div>
+
+              {/* CARD 2 */}
+              <div className="p-5 rounded-[2.2rem] border border-slate-200 dark:border-purple-500/20 bg-purple-500/[0.06] dark:bg-purple-400/[0.06] hover:scale-[1.02] transition-transform duration-300">
+                <ShieldCheck
+                  className="text-purple-500 dark:text-purple-400 mb-3"
+                  size={20}
+                />
+
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-1">
+                  Security
+                </p>
+
+                <p className="text-xs font-bold text-slate-900 dark:text-white">
+                  Privacy Policy
+                </p>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
-      <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+            {/* FOOTER */}
+            <div className="mt-8 flex items-center justify-between">
+              <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                © 2026 G.R. Minds Technologies.
+              </p>
+
+              <div className="flex gap-3">
+                <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= PRIVACY MODAL ================= */}
+      <PrivacyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
+      />
     </>
   );
 };

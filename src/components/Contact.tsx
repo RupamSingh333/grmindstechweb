@@ -51,7 +51,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 md:py-20 px-4 md:px-6 overflow-hidden bg-slate-50 dark:bg-[#030712] inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] ">
+    <section id="contact" className="relative py-20 md:py-20 px-4 md:px-6 overflow-hidden bg-transparent inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] ">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_0%,transparent_70%)] pointer-events-none" />
 
@@ -99,18 +99,6 @@ const Contact = () => {
                   </motion.div>
                 ))}
               </div>
-
-              {/* Office Locations Grid */}
-              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 md:mt-8">
-                <div className="p-5 md:p-6 rounded-[24px] md:rounded-[32px] bg-slate-900 dark:bg-white text-white dark:text-slate-900">
-                  <p className="text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">Uttar Pradesh</p>
-                  <p className="text-[11px] md:text-xs font-medium leading-relaxed">BM Raj Tower, Varanasi, UP - 221007</p>
-                </div>
-                <div className="p-5 md:p-6 rounded-[24px] md:rounded-[32px] bg-cyan-500 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-widest opacity-80 mb-2">Bihar Office</p>
-                  <p className="text-[11px] md:text-xs font-medium leading-relaxed">Kothwa Khagaul, Patna, BR - 801105</p>
-                </div>
-              </div> */}
             </ScrollReveal>
           </div>
 
@@ -125,24 +113,24 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Name</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1 md:ml-3">Name</label>
                         <Input
                           id="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="h-12 md:h-14 rounded-xl md:rounded-2xl bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
+                          className="h-12 md:h-14 rounded-full px-6 bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
                           placeholder="Your Name"
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Email</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1 md:ml-3">Email</label>
                         <Input
                           id="email"
                           type="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="h-12 md:h-14 rounded-xl md:rounded-2xl bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
+                          className="h-12 md:h-14 rounded-full px-6 bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
                           placeholder="Email Address"
                           required
                         />
@@ -150,24 +138,24 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Subject</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1 md:ml-3">Subject</label>
                       <Input
                         id="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className="h-12 md:h-14 rounded-xl md:rounded-2xl bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
+                        className="h-12 md:h-14 rounded-full px-6 bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
                         placeholder="Project Inquiry"
                         required
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Message</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1 md:ml-3">Message</label>
                       <Textarea
                         id="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className="rounded-2xl md:rounded-3xl bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all p-4 text-sm"
+                        className="rounded-[2.2rem] p-6 bg-white/50 dark:bg-white/5 border-slate-200 dark:border-white/10 focus:ring-2 ring-cyan-500/50 transition-all text-sm"
                         placeholder="Tell us about your digital vision..."
                         rows={4}
                         required
@@ -175,7 +163,7 @@ const Contact = () => {
                     </div>
 
                     <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-                      <Button type="submit" className="w-full h-14 md:h-16 bg-cyan-500 hover:bg-cyan-600 text-white font-black uppercase tracking-widest rounded-xl md:rounded-2xl shadow-lg shadow-cyan-500/20 transition-all text-sm">
+                      <Button type="submit" className="w-full h-14 md:h-16 bg-cyan-500 hover:bg-cyan-600 text-white font-black uppercase tracking-widest rounded-full shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-95 transition-all text-sm">
                         Dispatch Message
                         <Send className="ml-2 h-4 w-4 md:ml-3 md:h-5 md:w-5" />
                       </Button>

@@ -34,7 +34,7 @@ const teamMembers = [
 
 const Team = () => {
     return (
-        <section className="py-16 md:py-20 px-6 relative overflow-hidden bg-slate-50 dark:bg-[#030712] inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]" id="teams">
+        <section className="py-16 md:py-20 px-6 relative overflow-hidden bg-transparent inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px]" id="teams">
 
             {/* Background */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-cyan-500/5 blur-[120px] rounded-full rotate-12 pointer-events-none" />
@@ -119,7 +119,7 @@ const Team = () => {
                                                         href={social.url} 
                                                         target="_blank" 
                                                         whileHover={{ scale: 1.1, y: -3 }} 
-                                                        className="p-3 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-cyan-500 hover:text-white transition-all"
+                                                        className="p-3 rounded-full bg-slate-100 dark:bg-white/5 hover:bg-cyan-500 hover:text-white transition-all"
                                                      >
                                                          <social.icon size={18} />
                                                      </motion.a>

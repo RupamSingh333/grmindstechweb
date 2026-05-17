@@ -3,30 +3,38 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const AntigravityBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
+  const mousePosRef = useRef({ x: -1000, y: -1000 });
+  const isHoveringInteractiveRef = useRef(false);
   const { scrollY } = useScroll();
   const yOffset = useTransform(scrollY, [0, 1000], [0, -200]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      mousePosRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mousePosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
     };
     
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest("a, button, [role='button'], .group")) {
-        setIsHoveringInteractive(true);
+        isHoveringInteractiveRef.current = true;
       } else {
-        setIsHoveringInteractive(false);
+        isHoveringInteractiveRef.current = false;
       }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("mouseover", handleMouseOver);
     
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("mouseover", handleMouseOver);
     };
   }, []);
@@ -134,7 +142,7 @@ const AntigravityBackground = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < particles.length; i++) {
         particles[i].draw();
-        particles[i].update(mousePos.x, mousePos.y, isHoveringInteractive);
+        particles[i].update(mousePosRef.current.x, mousePosRef.current.y, isHoveringInteractiveRef.current);
       }
       
       ctx.globalAlpha = 0.05;
@@ -172,10 +180,10 @@ const AntigravityBackground = () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mousePos, isHoveringInteractive]);
+  }, []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden">
       <motion.div 
         style={{ y: yOffset }}
         className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-cyan-500/5 blur-[120px] dark:bg-cyan-500/10" 

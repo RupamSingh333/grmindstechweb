@@ -77,7 +77,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] relative py-24 px-4 overflow-hidden bg-slate-50 dark:bg-[#030712]">
+    <section id="services" className="inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:60px_60px] relative py-24 px-4 overflow-hidden bg-transparent">
       {/* Background Grid & Glows */}
       <div className="absolute pointer-events-none" />
       <div className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
