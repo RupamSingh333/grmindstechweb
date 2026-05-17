@@ -50,18 +50,17 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[60] flex justify-center pointer-events-none">
-        <motion.nav
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          className={`
-            mt-4 pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
-            flex items-center justify-between px-6 py-3
-            ${isScrolled 
-              ? 'w-[95%] md:w-[85%] lg:w-[75%] rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-2xl saturate-150' 
-              : 'w-full md:w-[98%] rounded-none bg-transparent border-transparent'}
-          `}
-        >
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`
+          fixed top-4 left-0 right-0 mx-auto z-[60] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
+          flex items-center justify-between px-6 py-3
+          ${isScrolled 
+            ? 'w-[95%] md:w-[85%] lg:w-[75%] rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-2xl saturate-150' 
+            : 'w-full md:w-[98%] rounded-none bg-transparent border-transparent'}
+        `}
+      >
           {/* --- LOGO: INCREASED SIZE & GLOW --- */}
           <motion.div 
             whileHover={{ scale: 1.05 }}
@@ -109,16 +108,15 @@ const Navbar = () => {
           {/* --- MOBILE TRIGGER --- */}
           <div className="lg:hidden flex items-center gap-3">
              <ThemeToggle />
-             <motion.button 
-               whileTap={{ scale: 0.9 }}
+             <button 
                onClick={() => setIsMobileMenuOpen(true)}
-               className="p-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black"
+               className="p-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-black active:scale-95 transition-transform cursor-pointer"
+               aria-label="Open Menu"
              >
                <Menu size={22} />
-             </motion.button>
+             </button>
           </div>
         </motion.nav>
-      </div>
 
       {/* --- MODERN MOBILE MENU OVERHAUL --- */}
       <AnimatePresence>
@@ -129,49 +127,26 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] lg:hidden overflow-hidden"
           >
-            {/* Backdrop with heavy blur */}
+            {/* Lightweight High-Performance Backdrop */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute inset-0 bg-white/80 dark:bg-black/90 backdrop-blur-2xl"
+              className="absolute inset-0 bg-white dark:bg-[#030712] shadow-2xl"
             />
 
-            {/* Decorative Background Elements */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              <motion.div 
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 90, 0],
-                  x: [0, 50, 0],
-                  y: [0, 30, 0]
-                }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-cyan-500/10 blur-[120px]"
-              />
-              <motion.div 
-                animate={{ 
-                  scale: [1.2, 1, 1.2],
-                  rotate: [0, -90, 0],
-                  x: [0, -50, 0],
-                  y: [0, -30, 0]
-                }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 blur-[120px]"
-              />
-            </div>
 
-            {/* Content Container */}
-            <div className="relative h-full flex flex-col p-8 pt-24">
+            {/* Content Container (Layered above the backdrop) */}
+            <div className="relative z-10 h-full flex flex-col p-8 pt-24">
               {/* Close Button */}
               <motion.button 
                 initial={{ scale: 0, rotate: -90 }}
                 animate={{ scale: 1, rotate: 0 }}
                 exit={{ scale: 0, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="absolute top-6 right-8 p-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full shadow-2xl z-50"
+                className="absolute top-6 right-6 md:right-8 p-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full shadow-2xl z-50 cursor-pointer active:scale-95 transition-transform"
+                aria-label="Close Menu"
               >
                 <X size={24} strokeWidth={3} />
               </motion.button>
@@ -191,9 +166,9 @@ const Navbar = () => {
                       delay: 0.1 + (i * 0.1) 
                     }}
                     onClick={() => handleNavClick(link.id)}
-                    className="group flex items-center gap-6 py-2 text-left"
+                    className="group flex items-center gap-6 py-2 text-left w-full cursor-pointer"
                   >
-                    <span className="text-xs font-black text-cyan-500/50 dark:text-cyan-400/40 uppercase tracking-[0.3em] font-mono">
+                    <span className="text-xs font-black text-cyan-500/70 dark:text-cyan-400/80 uppercase tracking-[0.3em] font-mono">
                       0{i + 1}
                     </span>
                     <div className="relative overflow-hidden">
@@ -216,8 +191,22 @@ const Navbar = () => {
               <div className="mt-auto pt-10 border-t border-slate-200 dark:border-white/10">
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: Briefcase, label: "Careers", value: "Join the Tribe", color: "bg-cyan-500/5 dark:bg-cyan-400/10" },
-                    { icon: ShieldCheck, label: "Security", value: "Privacy Policy", color: "bg-purple-500/5 dark:bg-purple-400/10" }
+                    { 
+                      icon: Briefcase, 
+                      label: "Careers", 
+                      value: "Join the Tribe", 
+                      bg: "bg-cyan-500/[0.08] dark:bg-cyan-400/[0.08]", 
+                      border: "border-slate-200 dark:border-cyan-500/20 hover:border-cyan-500 dark:hover:border-cyan-400",
+                      iconColor: "text-cyan-600 dark:text-cyan-400"
+                    },
+                    { 
+                      icon: ShieldCheck, 
+                      label: "Security", 
+                      value: "Privacy Policy", 
+                      bg: "bg-purple-500/[0.08] dark:bg-purple-400/[0.08]", 
+                      border: "border-slate-200 dark:border-purple-500/20 hover:border-purple-500 dark:hover:border-purple-400",
+                      iconColor: "text-purple-600 dark:text-purple-400"
+                    }
                   ].map((item, i) => (
                     <motion.div
                       key={item.label}
@@ -225,10 +214,10 @@ const Navbar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ delay: 0.5 + (i * 0.1) }}
-                      className={`${item.color} p-5 rounded-[2rem] border border-slate-100 dark:border-white/5 backdrop-blur-md group cursor-pointer`}
+                      className={`${item.bg} ${item.border} p-5 rounded-[2rem] border backdrop-blur-md group cursor-pointer transition-all duration-300`}
                     >
-                      <item.icon className="text-slate-900 dark:text-white mb-3 group-hover:scale-110 transition-transform" size={20} />
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-1">
+                      <item.icon className={`${item.iconColor} mb-3 group-hover:scale-110 transition-transform`} size={20} />
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-1">
                         {item.label}
                       </p>
                       <p className="text-xs font-bold text-slate-900 dark:text-white">
@@ -244,11 +233,10 @@ const Navbar = () => {
                   transition={{ delay: 0.8 }}
                   className="mt-8 flex items-center justify-between"
                 >
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
                     © 2024 GRMinds Tech
                   </p>
                   <div className="flex gap-4">
-                    {/* Placeholder social icons or similar */}
                     <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
                     <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
                   </div>
